@@ -12,7 +12,7 @@ export default function EngineeringMeeting() {
    const [blocks, setBlocks] = useState([] as BuildingBlock[])
 
    if (!started) {
-      setTimeout(() => randomise(), 500)
+      setTimeout(() => randomise(), 200)
       setStarted(true)
    }
 
@@ -23,6 +23,9 @@ export default function EngineeringMeeting() {
    return (
       <SketchProvider.Provider value={blocks}>
          <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover" />
+         <a href="https://github.com/novoda/engineering-meeting">
+            <img className="logo" src={`${process.env.PUBLIC_URL}/images/novoda.png`} alt="Novoda" />
+         </a>
          <div className="engineeringMeeting">
             <div className="sketch-view">
                <EngineeringMeetingSketch />
@@ -32,24 +35,20 @@ export default function EngineeringMeeting() {
             </div>
             <div className="meeting-structure">
                {[...blocks].reverse().map((block) => (
-                  <section className="block">
+                  <section key={block.name} className="block">
                      <img className="block-image" src={block.imagePath} alt={block.name} />
-                     <section className="block-details">
+                     <div className="block-details">
                         <h1 className="block-name">{block.name}</h1>
                         <p className="block-description">
                            <b>Description:</b> {block.description}
                         </p>
-                        <br />
-                        <br />
                         <p className="block-purpose">
                            <b>Purpose:</b> {block.purpose}
                         </p>
-                        <br />
-                        <br />
                         <p className="block-duration">
                            <b>Duration:</b> {block.duration.minimum} - {block.duration.maximum} minutes
                         </p>
-                     </section>
+                     </div>
                   </section>
                ))}
             </div>

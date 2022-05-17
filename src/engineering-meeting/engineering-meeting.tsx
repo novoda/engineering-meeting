@@ -1,16 +1,15 @@
 import { useState } from "react"
 import { BlockRandomiser } from "./block-randomiser"
-import { BuildingBlock } from "./building-block"
 import {} from "./extensions"
 import EngineeringMeetingSketch from "./sketch/sketch"
 import SketchProvider from "./sketch/sketch-provider"
 import "./styles/engineering-meeting.css"
 
 export default function EngineeringMeeting() {
-   const [blocks, setBlocks] = useState([] as BuildingBlock[])
    const randomiser = new BlockRandomiser()
+   const [blocks, setBlocks] = useState(randomiser.randomise())
 
-   async function randomize() {
+   async function randomise() {
       setBlocks(randomiser.randomise())
    }
 
@@ -20,8 +19,8 @@ export default function EngineeringMeeting() {
          <div className="engineeringMeeting">
             <div className="sketch-view">
                <EngineeringMeetingSketch />
-               <button className="randomiseButton" onClick={randomize}>
-                  Randomize
+               <button className="randomiseButton" onClick={randomise}>
+                  Randomise
                </button>
             </div>
             <div className="meeting-structure">

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "author": "",
-  "homepage": "",
+  "homepage": "https://novoda.github.io/engineering-meeting/",
   "dependencies": {
     "@types/p5": "^1.4.2",
     "@types/react": "^17.0.44",

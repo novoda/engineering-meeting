@@ -12,7 +12,7 @@ export default function EngineeringMeeting() {
    const [blocks, setBlocks] = useState([] as BuildingBlock[])
 
    if (!started) {
-      setTimeout(() => randomise(), 500)
+      setTimeout(() => randomise(), 100)
       setStarted(true)
    }
 

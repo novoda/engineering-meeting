@@ -1,45 +1,54 @@
 import $ from "jquery"
-import React, { useReducer } from "react"
+import React, { useState } from "react"
 import { P5Instance, ReactP5Wrapper, Sketch, SketchProps } from "react-p5-wrapper"
 import { debounce } from "ts-debounce"
 import { BuildingBlock } from "../building-block"
-import { BlockViewModel as BuildingBlockViewModel } from "./block-view-model"
 import SketchProvider from "./sketch-provider"
+import { StructureViewModel } from "./view-model"
 
-const sketch: Sketch = (p5: P5Instance) => {
-   const overlappingFactor = 0.6
-   let buildingBlocks = [] as BuildingBlock[]
-   let blocks: BuildingBlockViewModel[] = []
-   p5.setup = () => {
-      p5.createCanvas($("#sketch").width()!, $("#sketch").height()!)
-      p5.background(255)
+const sketch: Sketch = (sketch: P5Instance) => {
+   let structure: StructureViewModel
+
+   sketch.setup = () => {
+      sketch.createCanvas($("#sketch").width()!, $("#sketch").height()!)
    }
 
-   p5.draw = () => {
-      p5.background(255)
+   sketch.draw = () => {
+      sketch.background(255)
 
-      let y = p5.height - p5.height / 7
-      blocks?.forEach((block) => {
-         y -= block.height * overlappingFactor
-         p5.image(block.image, p5.width / 3, y, block.width, block.height)
-      })
+      structure?.blocks.reduce((accumulator, block) => {
+         const x = sketch.width / 2 - block.width / 2
+         const y = accumulator - block.height * 0.6 - block.height / 2
+
+         sketch.image(block.image, x, y, block.width, block.height)
+
+         return y + block.height / 2
+      }, sketch.height)
    }
 
-   p5.updateWithProps = (props: SketchProps) => {
-      if (props.blocks !== buildingBlocks || p5.width !== $("#sketch").width()! || p5.height !== $("#sketch").height()!) {
-         p5.resizeCanvas($("#sketch").width()!, $("#sketch").height()!)
-         buildingBlocks = props!.blocks as BuildingBlock[]
-         blocks = (props!.blocks as BuildingBlock[]).map((block) => BuildingBlockViewModel.fromBuildingBlock(block, p5, buildingBlocks.length))
+   sketch.updateWithProps = (props: SketchProps) => {
+      if (props.canvasSize !== { width: sketch.width, height: sketch.height } || (props.data && props.data !== structure?.data)) {
+         const canvasSize = props.canvasSize! as { width: number; height: number }
+         sketch.resizeCanvas(canvasSize.width, canvasSize.height)
+
+         const data = props!.data as BuildingBlock[]
+         structure = StructureViewModel.from(data, sketch)
       }
    }
 }
 
 export default function EngineeringMeetingSketch() {
-   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0)
+   const [canvasSize, setCanvasSize] = useState({})
+   const [started, setStarted] = useState(false)
+
+   if (!started) {
+      setTimeout(() => setCanvasSize({ width: $("#sketch").width()!, height: $("#sketch").height()! }), 100)
+      setStarted(true)
+   }
 
    React.useEffect(() => {
-      const debounced = debounce(() => forceUpdate(), 200)
-      const handleResize = () => debounced()
+      const debounced = debounce((width, height) => setCanvasSize({ width, height }), 200)
+      const handleResize = () => debounced($("#sketch").width()!, $("#sketch").height()!)
       window.addEventListener("resize", handleResize)
 
       return () => window.removeEventListener("resize", handleResize)
@@ -47,9 +56,9 @@ export default function EngineeringMeetingSketch() {
 
    return (
       <SketchProvider.Consumer>
-         {(blocks) => (
+         {(data) => (
             <div className="EngineeringMeetingSketch" id="sketch">
-               <ReactP5Wrapper customClass="canvas" sketch={sketch} blocks={blocks} ignored={ignored} />
+               <ReactP5Wrapper customClass="canvas" sketch={sketch} data={data} canvasSize={canvasSize} />
             </div>
          )}
       </SketchProvider.Consumer>

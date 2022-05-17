@@ -42,7 +42,7 @@ export default function EngineeringMeetingSketch() {
    const [started, setStarted] = useState(false)
 
    if (!started) {
-      setTimeout(() => setCanvasSize({ width: $("#sketch").width()!, height: $("#sketch").height()! }), 250)
+      setTimeout(() => setCanvasSize({ width: $("#sketch").width()!, height: $("#sketch").height()! }), 300)
       setStarted(true)
    }
 

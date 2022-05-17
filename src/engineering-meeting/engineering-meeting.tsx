@@ -12,7 +12,7 @@ export default function EngineeringMeeting() {
    const [blocks, setBlocks] = useState([] as BuildingBlock[])
 
    if (!started) {
-      setTimeout(() => randomise(), 100)
+      setTimeout(() => randomise(), 200)
       setStarted(true)
    }
 
@@ -23,6 +23,9 @@ export default function EngineeringMeeting() {
    return (
       <SketchProvider.Provider value={blocks}>
          <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover" />
+         <a href="https://github.com/novoda/engineering-meeting">
+            <img className="logo" src={`${process.env.PUBLIC_URL}/images/novoda.png`} alt="Novoda" />
+         </a>
          <div className="engineeringMeeting">
             <div className="sketch-view">
                <EngineeringMeetingSketch />

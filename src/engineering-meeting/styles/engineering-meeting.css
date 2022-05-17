@@ -1,4 +1,9 @@
 @media (orientation: landscape) {
+   .logo {
+      padding: 1vmin;
+      height: auto;
+      width: 20vmin;
+   }
    .engineeringMeeting {
       text-align: center;
       background-color: #ffffff;
@@ -56,6 +61,12 @@
 }
 
 @media (orientation: portrait) {
+   .logo {
+      padding: 1vmin;
+      height: auto;
+      width: 20vmin;
+   }
+
    .engineeringMeeting {
       text-align: center;
       background-color: #ffffff;

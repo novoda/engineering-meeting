@@ -1,0 +1,19 @@
+body {
+   font-family: "Proxima-Nova-Regular";
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   margin: 0%;
+   padding: 0%;
+   background-color: #ffffff;
+   width: 100vw;
+   height: 100vh;
+}
+
+@font-face {
+   font-family: "Proxima-Nova-Regular";
+   src: local("Proxima-Nova-Regular"), url(../resources/fonts/proxima-nova.otf) format("opentype");
+}
+
+* {
+   box-sizing: border-box;
+}

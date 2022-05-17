@@ -1,6 +1,8 @@
 # Engineering Meeting
 Novoda Engineering Meeting - Building Blocks Randomiser
 
+https://novoda.github.io/engineering-meeting/
+
 ![image](https://user-images.githubusercontent.com/7768517/168707185-4533f0d9-bb5c-4612-8a3b-9bdb3802a65d.png)
 
 **Instructions**

@@ -75,7 +75,7 @@ export const allBlocks = [
     new BuildingBlock(
         {
             name: "Learning Pill",
-            description: "This building block is about knowledge sharing. You can share everything you find interesting. Just entry the topic you would like to discuss and the most voted one will be presented.",
+            description: "This building block is about knowledge sharing. You can share everything you find interesting.\nJust entry the topic you would like to discuss and the most voted one will be presented.",
             purpose: "Sharing is caring. The idea is to create an engaging place on which we can gather to share our learning with our colleagues.",
             duration: new Duration({ minimum: 20, maximum: 30 }),
             imagePath: `${process.env.PUBLIC_URL}/images/image6.png`,

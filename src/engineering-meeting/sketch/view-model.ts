@@ -24,7 +24,7 @@ export class BlockViewModel {
         const image = sketch.loadImage(buildingBlock.imagePath)
         return new BlockViewModel({
             image,
-            scale: sketch.height / (numberOfBlocks * 700)
+            scale: sketch.height / (numberOfBlocks * 600)
         })
     }
     constructor({ image, scale }: { image: Image, scale: number }) {

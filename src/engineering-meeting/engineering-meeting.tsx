@@ -32,24 +32,20 @@ export default function EngineeringMeeting() {
             </div>
             <div className="meeting-structure">
                {[...blocks].reverse().map((block) => (
-                  <section className="block">
+                  <section key={block.name} className="block">
                      <img className="block-image" src={block.imagePath} alt={block.name} />
-                     <section className="block-details">
+                     <div className="block-details">
                         <h1 className="block-name">{block.name}</h1>
                         <p className="block-description">
                            <b>Description:</b> {block.description}
                         </p>
-                        <br />
-                        <br />
                         <p className="block-purpose">
                            <b>Purpose:</b> {block.purpose}
                         </p>
-                        <br />
-                        <br />
                         <p className="block-duration">
                            <b>Duration:</b> {block.duration.minimum} - {block.duration.maximum} minutes
                         </p>
-                     </section>
+                     </div>
                   </section>
                ))}
             </div>

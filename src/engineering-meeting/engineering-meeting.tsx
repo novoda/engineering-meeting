@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { BlockRandomiser } from "./block-randomiser"
+import { BuildingBlock } from "./building-block"
 import {} from "./extensions"
 import EngineeringMeetingSketch from "./sketch/sketch"
 import SketchProvider from "./sketch/sketch-provider"
@@ -7,7 +8,13 @@ import "./styles/engineering-meeting.css"
 
 export default function EngineeringMeeting() {
    const randomiser = new BlockRandomiser()
-   const [blocks, setBlocks] = useState(randomiser.randomise())
+   const [started, setStarted] = useState(false)
+   const [blocks, setBlocks] = useState([] as BuildingBlock[])
+
+   if (!started) {
+      setTimeout(() => randomise(), 500)
+      setStarted(true)
+   }
 
    async function randomise() {
       setBlocks(randomiser.randomise())
@@ -29,19 +36,19 @@ export default function EngineeringMeeting() {
                      <img className="block-image" src={block.imagePath} alt={block.name} />
                      <section className="block-details">
                         <h1 className="block-name">{block.name}</h1>
-                        <text className="block-description">
+                        <p className="block-description">
                            <b>Description:</b> {block.description}
-                        </text>
+                        </p>
                         <br />
                         <br />
-                        <text className="block-purpose">
+                        <p className="block-purpose">
                            <b>Purpose:</b> {block.purpose}
-                        </text>
+                        </p>
                         <br />
                         <br />
-                        <text className="block-duration">
+                        <p className="block-duration">
                            <b>Duration:</b> {block.duration.minimum} - {block.duration.maximum} minutes
-                        </text>
+                        </p>
                      </section>
                   </section>
                ))}

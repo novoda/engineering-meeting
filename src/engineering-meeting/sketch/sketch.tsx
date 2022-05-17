@@ -14,8 +14,7 @@ const sketch: Sketch = (sketch: P5Instance) => {
    }
 
    sketch.draw = () => {
-      sketch.background(255)
-
+      sketch.clear(0, 0, 0, 0)
       structure?.blocks.reduce((accumulator, block) => {
          const x = sketch.width / 2 - block.width / 2
          const y = accumulator - block.height * 0.6 - block.height / 2
@@ -42,7 +41,7 @@ export default function EngineeringMeetingSketch() {
    const [started, setStarted] = useState(false)
 
    if (!started) {
-      setTimeout(() => setCanvasSize({ width: $("#sketch").width()!, height: $("#sketch").height()! }), 300)
+      setTimeout(() => setCanvasSize({ width: $("#sketch").width()!, height: $("#sketch").height()! }), 1000)
       setStarted(true)
    }
 

@@ -1,14 +1,12 @@
-import p5 from "p5";
-
-const loader = new p5(() => null)
-
 export class BuildingBlock {
-    readonly name: string | undefined
+    readonly id: number | undefined
+    readonly name: string
     readonly description: string
     readonly purpose: string
     readonly duration: Duration
     readonly imagePath: string
-    constructor({ name, description, purpose, duration, imagePath }: { name: string | undefined; description: string; purpose: string; duration: Duration; imagePath: string }) {
+    constructor({ id, name, description, purpose, duration, imagePath }: { id: number | undefined; name: string; description: string; purpose: string; duration: Duration; imagePath: string }) {
+        this.id = id
         this.name = name
         this.description = description
         this.purpose = purpose
@@ -29,6 +27,7 @@ export class Duration {
 export const allBlocks = [
     new BuildingBlock(
         {
+            id: 1,
             name: "Wiki Page Showcase",
             description: "This building block is an opportunity to showcase a particularly useful entry in the wiki.",
             purpose: "Surfacing the most useful content of the wiki and encouraging people to write more entries in the wiki.",
@@ -38,6 +37,7 @@ export const allBlocks = [
     ),
     new BuildingBlock(
         {
+            id: 2,
             name: "Project Updates",
             description: "This is a 5 minutes max updates for our running projects. Each team self organise to share their updates to the team.",
             purpose: "The purpose of this block is to help the team to be up to date with the events in the projects we are working on at Novoda.",
@@ -47,7 +47,8 @@ export const allBlocks = [
     ),
     new BuildingBlock(
         {
-            name: undefined,
+            id: undefined,
+            name: "???",
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
@@ -56,7 +57,8 @@ export const allBlocks = [
     ),
     new BuildingBlock(
         {
-            name: undefined,
+            id: undefined,
+            name: "???",
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
@@ -65,7 +67,8 @@ export const allBlocks = [
     ),
     new BuildingBlock(
         {
-            name: undefined,
+            id: undefined,
+            name: "???",
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
@@ -74,6 +77,7 @@ export const allBlocks = [
     ),
     new BuildingBlock(
         {
+            id: 6,
             name: "Learning Pill",
             description: "This building block is about knowledge sharing. You can share everything you find interesting.\nJust entry the topic you would like to discuss and the most voted one will be presented.",
             purpose: "Sharing is caring. The idea is to create an engaging place on which we can gather to share our learning with our colleagues.",
@@ -83,6 +87,7 @@ export const allBlocks = [
     ),
     new BuildingBlock(
         {
+            id: 7,
             name: "Result.failure === WIN",
             description: "This building block is about celebration around failure and the learning associated to that.\nEveryone should have thought about their own failures and ready for sharing it as a group. \nA roulette will dictate the person sharing their failures.",
             purpose: "To be able to share failure stories and celebrate the leanings associated to them.\nIt’s OK to fail.Failure is part of learning.This building block help us to  be conscious about that.",
@@ -92,7 +97,8 @@ export const allBlocks = [
     ),
     new BuildingBlock(
         {
-            name: undefined,
+            id: undefined,
+            name: "???",
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
@@ -101,7 +107,8 @@ export const allBlocks = [
     ),
     new BuildingBlock(
         {
-            name: undefined,
+            id: undefined,
+            name: "???",
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
@@ -110,7 +117,8 @@ export const allBlocks = [
     ),
     new BuildingBlock(
         {
-            name: undefined,
+            id: undefined,
+            name: "???",
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
@@ -119,7 +127,8 @@ export const allBlocks = [
     ),
     new BuildingBlock(
         {
-            name: undefined,
+            id: undefined,
+            name: "???",
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
@@ -128,7 +137,8 @@ export const allBlocks = [
     ),
     new BuildingBlock(
         {
-            name: undefined,
+            id: undefined,
+            name: "???",
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),

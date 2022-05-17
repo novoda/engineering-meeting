@@ -26,8 +26,8 @@ const sketch: Sketch = (p5: P5Instance) => {
    }
 
    p5.updateWithProps = (props: SketchProps) => {
-      p5.resizeCanvas($("#sketch").width()!, $("#sketch").height()!)
-      if (props.blocks !== buildingBlocks) {
+      if (props.blocks !== buildingBlocks || p5.width !== $("#sketch").width()! || p5.height !== $("#sketch").height()!) {
+         p5.resizeCanvas($("#sketch").width()!, $("#sketch").height()!)
          buildingBlocks = props!.blocks as BuildingBlock[]
          blocks = (props!.blocks as BuildingBlock[]).map((block) => BuildingBlockViewModel.fromBuildingBlock(block, p5, buildingBlocks.length))
       }

@@ -1,3 +1,4 @@
+import html2canvas from "html2canvas"
 import { useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -16,27 +17,24 @@ export default function EngineeringMeeting() {
    }
 
    async function structureToClipboard() {
-      const canvas = document.getElementById("sketch")?.children[0].children[0] as HTMLCanvasElement
-      canvas?.toBlob((blob) => {
-         navigator.clipboard.write([new ClipboardItem({ [blob!.type]: blob! })]).then(() => {
-            toast("Structure copied to clipboard!")
-         })
-      })
+      const page = document.getElementById("root")!
+      const options = { ignoreElements: (element: Element) => element.hasAttribute("exclude-from-screenshot") }
+      html2canvas(page, options).then((canvas) => canvas.toClipboard(() => toast.success("Meeting copied to clipboard")))
    }
 
    return (
       <SketchProvider.Provider value={blocks}>
          <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover" />
          <a href="https://github.com/novoda/engineering-meeting">
-            <img className="logo" src={`${process.env.PUBLIC_URL}/images/novoda.png`} alt="Novoda" />
+            <img className="logo" src={`${process.env.PUBLIC_URL}/images/novoda.png`} alt="Novoda" exclude-from-screenshot="" />
          </a>
-         <div className="engineeringMeeting">
+         <div id="meeting" className="engineeringMeeting">
             <div className="sketch-view">
                <div onClick={structureToClipboard}>
-                  <img className="click" src={`${process.env.PUBLIC_URL}/images/click-here-to-copy.png`} alt="Copy" />
+                  <img className="click" src={`${process.env.PUBLIC_URL}/images/click-here-to-copy.png`} alt="Copy" exclude-from-screenshot="" />
                   <EngineeringMeetingSketch />
                </div>
-               <button className="randomiseButton" onClick={randomise}>
+               <button className="randomiseButton" onClick={randomise} exclude-from-screenshot="">
                   Randomise
                </button>
                <ToastContainer

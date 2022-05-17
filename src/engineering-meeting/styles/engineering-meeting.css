@@ -2,11 +2,21 @@
    padding: 1vmin;
    height: auto;
    width: 20vmin;
+   position: absolute;
+   top: 0px;
+   left: 0px;
+}
+
+.click {
+   height: auto;
+   width: 15vmin;
+   position: relative;
+   top: 1vmin;
+   right: 0px;
 }
 
 .engineeringMeeting {
    text-align: center;
-   background-color: #ffffff;
    font-family: "Proxima-Nova-Regular";
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
@@ -19,9 +29,27 @@
    flex-direction: column;
 }
 
+.engineeringMeeting .sketch-view .EngineeringMeetingSketch {
+   padding-bottom: 2vmin;
+}
+
 .engineeringMeeting .sketch-view .randomiseButton {
    align-self: center;
    padding: 1vmin;
+   margin-bottom: 1vmin;
+}
+
+.engineeringMeeting .meeting-structure .block {
+   padding: 1vmin;
+   margin: 1vmin;
+   justify-items: left;
+   white-space: pre-line;
+   text-align: left;
+   display: flex;
+   flex-direction: row;
+   width: 98%;
+   height: auto;
+   background-color: #f3f3f3;
 }
 
 .engineeringMeeting .meeting-structure {
@@ -40,19 +68,6 @@
    margin-left: 2vmin;
 }
 
-.engineeringMeeting .meeting-structure .block {
-   padding: 1vmin;
-   margin: 1vmin;
-   justify-items: left;
-   white-space: pre-line;
-   text-align: left;
-   display: flex;
-   flex-direction: row;
-   width: 98%;
-   height: auto;
-   background-color: #f7f7f7;
-}
-
 @media (orientation: landscape) {
    .engineeringMeeting {
       flex-direction: row;
@@ -61,6 +76,10 @@
    .engineeringMeeting .sketch-view .EngineeringMeetingSketch {
       height: 80vh;
       width: 40vw;
+   }
+
+   .engineeringMeeting .meeting-structure {
+      width: 60vw;
    }
 }
 
@@ -72,5 +91,9 @@
    .engineeringMeeting .sketch-view .EngineeringMeetingSketch {
       height: 50vh;
       width: auto;
+   }
+
+   .engineeringMeeting .meeting-structure {
+      width: 100vw;
    }
 }

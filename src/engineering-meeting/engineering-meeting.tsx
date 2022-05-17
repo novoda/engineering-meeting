@@ -1,6 +1,7 @@
 import { useState } from "react"
+import { toast, ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 import { BlockRandomiser } from "./block-randomiser"
-import { BuildingBlock } from "./building-block"
 import {} from "./extensions"
 import EngineeringMeetingSketch from "./sketch/sketch"
 import SketchProvider from "./sketch/sketch-provider"
@@ -8,16 +9,19 @@ import "./styles/engineering-meeting.css"
 
 export default function EngineeringMeeting() {
    const randomiser = new BlockRandomiser()
-   const [started, setStarted] = useState(false)
-   const [blocks, setBlocks] = useState([] as BuildingBlock[])
-
-   if (!started) {
-      setTimeout(() => randomise(), 200)
-      setStarted(true)
-   }
+   const [blocks, setBlocks] = useState(randomiser.randomise())
 
    async function randomise() {
       setBlocks(randomiser.randomise())
+   }
+
+   async function structureToClipboard() {
+      const canvas = document.getElementById("sketch")?.children[0].children[0] as HTMLCanvasElement
+      canvas?.toBlob((blob) => {
+         navigator.clipboard.write([new ClipboardItem({ [blob!.type]: blob! })]).then(() => {
+            toast("Structure copied to clipboard!")
+         })
+      })
    }
 
    return (
@@ -28,14 +32,28 @@ export default function EngineeringMeeting() {
          </a>
          <div className="engineeringMeeting">
             <div className="sketch-view">
-               <EngineeringMeetingSketch />
+               <div onClick={structureToClipboard}>
+                  <img className="click" src={`${process.env.PUBLIC_URL}/images/click-here-to-copy.png`} alt="Copy" />
+                  <EngineeringMeetingSketch />
+               </div>
                <button className="randomiseButton" onClick={randomise}>
                   Randomise
                </button>
+               <ToastContainer
+                  position="top-center"
+                  autoClose={1000}
+                  hideProgressBar={true}
+                  newestOnTop={true}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+               />
             </div>
             <div className="meeting-structure">
                {[...blocks].reverse().map((block) => (
-                  <section key={block.name} className="block">
+                  <section key={block.id} className="block">
                      <img className="block-image" src={block.imagePath} alt={block.name} />
                      <div className="block-details">
                         <h1 className="block-name">{block.name}</h1>

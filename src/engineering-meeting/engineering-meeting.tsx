@@ -8,38 +8,29 @@ import EngineeringMeetingSketch from "./sketch/sketch"
 import SketchProvider from "./sketch/sketch-provider"
 import "./styles/engineering-meeting.css"
 
-let screenshot: HTMLCanvasElement | null = null
 export default function EngineeringMeeting() {
    const randomiser = new BlockRandomiser()
    const screenshotTaker = new ScreenshotTaker()
    const [blocks, setBlocks] = useState(randomiser.randomise())
-   const [started, setStarted] = useState(false)
-
-   if (!started) {
-      setStarted(true)
-      takeScreenshot({ delay: 2000 })
-   }
 
    async function randomise() {
       setBlocks(randomiser.randomise())
-      takeScreenshot({ delay: 1000 })
-   }
-
-   function takeScreenshot({ delay }: { delay: number }) {
-      /**
-       * Taking screenshots is a bit slow, Safari requires it to be taken 1 second before copying to clibpoard.
-       * Hence, we need to take them ahead of time.
-       */
-      setTimeout(async () => {
-         screenshot = await screenshotTaker.takeScreenshot()
-      }, delay)
    }
 
    async function structureToClipboard() {
-      toast.info("Copying to clipboard...", { autoClose: 1000 })
-      setTimeout(() => {
-         screenshot?.toClipboard(() => toast.success("Meeting copied to clipboard"))
-      }, 1500)
+      const copying = toast.info("Copying to clipboard...")
+      screenshotTaker.takeScreenshot().then((screenshot) =>
+         screenshot.toClipboard({
+            onSuccess: () => {
+               toast.dismiss(copying)
+               toast.success("Meeting copied to clipboard", { autoClose: 1000 })
+            },
+            onFailure: () => {
+               toast.dismiss(copying)
+               toast.error("Failed copying to clipboard. Your browser blocked it.", { autoClose: 1000 })
+            },
+         })
+      )
    }
 
    return (

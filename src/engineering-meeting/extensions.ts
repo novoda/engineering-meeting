@@ -7,7 +7,7 @@ declare global {
     }
 
     interface HTMLElement {
-        toClipboard(onSuccess: () => void): void
+        toClipboard({ onSuccess, onFailure }: { onSuccess: () => void, onFailure: () => void }): void
     }
 }
 
@@ -22,7 +22,7 @@ Array.prototype.shuffle = function <T>(this: T[]) {
     return this.sort(() => Math.random() - 0.5)
 }
 
-HTMLCanvasElement.prototype.toClipboard = function (this: HTMLCanvasElement, onSuccess: () => void) {
+HTMLCanvasElement.prototype.toClipboard = function (this: HTMLCanvasElement, { onSuccess, onFailure }: { onSuccess: () => void, onFailure: () => void }) {
     const data = async () =>
         new Promise<Blob>((resolve, reject) => {
             this.toBlob((blob) => {
@@ -34,7 +34,12 @@ HTMLCanvasElement.prototype.toClipboard = function (this: HTMLCanvasElement, onS
             })
         })
 
-    navigator.clipboard.write([new ClipboardItem({ "image/png": data() })]).then(() => {
-        onSuccess()
-    })
+    const { clipboard } = navigator
+    if (clipboard) {
+        clipboard.write([new ClipboardItem({ "image/png": data() })])
+            .then(() => onSuccess())
+            .catch(() => onFailure());
+    } else {
+        onFailure();
+    }
 }

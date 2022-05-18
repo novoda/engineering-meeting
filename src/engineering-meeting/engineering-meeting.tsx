@@ -1,25 +1,45 @@
-import html2canvas from "html2canvas"
 import { useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { BlockRandomiser } from "./block-randomiser"
 import {} from "./extensions"
+import { ScreenshotTaker } from "./screenshot-taker"
 import EngineeringMeetingSketch from "./sketch/sketch"
 import SketchProvider from "./sketch/sketch-provider"
 import "./styles/engineering-meeting.css"
 
+let screenshot: HTMLCanvasElement | null = null
 export default function EngineeringMeeting() {
    const randomiser = new BlockRandomiser()
+   const screenshotTaker = new ScreenshotTaker()
    const [blocks, setBlocks] = useState(randomiser.randomise())
+   const [started, setStarted] = useState(false)
+
+   if (!started) {
+      setStarted(true)
+      takeScreenshot({ delay: 2000 })
+   }
 
    async function randomise() {
       setBlocks(randomiser.randomise())
+      takeScreenshot({ delay: 1000 })
+   }
+
+   function takeScreenshot({ delay }: { delay: number }) {
+      /**
+       * Taking screenshots is a bit slow, Safari requires it to be taken 1 second before copying to clibpoard.
+       * Hence, we need to take them ahead of time.
+       */
+      setTimeout(async () => {
+         screenshot = await screenshotTaker.takeScreenshot()
+      }, delay)
    }
 
    async function structureToClipboard() {
-      const page = document.getElementById("root")!
-      const options = { ignoreElements: (element: Element) => element.hasAttribute("exclude-from-screenshot") }
-      html2canvas(page, options).then((canvas) => canvas.toClipboard(() => toast.success("Meeting copied to clipboard")))
+      toast.info("Copying to clipboard...", { autoClose: 1000 })
+      setTimeout(() => {
+         screenshot?.toClipboard(() => toast.success("Meeting copied to clipboard"))
+      }, 1500)
    }
 
    return (
@@ -37,20 +57,10 @@ export default function EngineeringMeeting() {
                <button className="randomiseButton" onClick={randomise} exclude-from-screenshot="">
                   Randomise
                </button>
-               <ToastContainer
-                  position="top-center"
-                  autoClose={1000}
-                  hideProgressBar={true}
-                  newestOnTop={true}
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss
-                  draggable
-                  pauseOnHover
-               />
+               <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true} />
             </div>
             <div className="meeting-structure">
-               {[...blocks].reverse().map((block) => (
+               {[...blocks!].reverse().map((block) => (
                   <section key={block.id} className="block">
                      <img className="block-image" src={block.imagePath} alt={block.name} />
                      <div className="block-details">

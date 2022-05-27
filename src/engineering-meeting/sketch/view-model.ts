@@ -5,8 +5,8 @@ export class StructureViewModel {
     readonly blocks: BlockViewModel[] = [];
     readonly data: BuildingBlock[] = [];
 
-    static from(blocks: BuildingBlock[], sketch: p5): StructureViewModel {
-        const blocksViewModel: BlockViewModel[] = blocks.map(block => BlockViewModel.from(block, sketch, blocks.length));
+    static from(blocks: BuildingBlock[], sketch: p5, canvasHeight: number): StructureViewModel {
+        const blocksViewModel: BlockViewModel[] = blocks.map(block => BlockViewModel.from(block, sketch, canvasHeight, blocks.length));
         return new StructureViewModel(blocksViewModel, blocks);
     }
 
@@ -20,11 +20,11 @@ export class BlockViewModel {
     readonly image: Image
     private scale: number
 
-    static from(buildingBlock: BuildingBlock, sketch: p5, numberOfBlocks: number): BlockViewModel {
+    static from(buildingBlock: BuildingBlock, sketch: p5, canvasHeight: number, numberOfBlocks: number): BlockViewModel {
         const image = sketch.loadImage(buildingBlock.imagePath)
         return new BlockViewModel({
             image,
-            scale: sketch.height / (Math.max(4, numberOfBlocks) * 650)
+            scale: canvasHeight / (Math.max(4, numberOfBlocks) * 325)
         })
     }
     constructor({ image, scale }: { image: Image, scale: number }) {

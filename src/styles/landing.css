@@ -1,0 +1,29 @@
+html,
+body {
+   height: 100%;
+}
+
+html {
+   text-align: center;
+}
+
+.welcome {
+   font-family: "Proxima-Nova-Regular";
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+}
+.welcome .meeting-logo {
+   width: auto;
+   height: 60%;
+   align-self: center;
+   margin-bottom: 2vmin;
+}
+
+.welcome .generate {
+   align-self: center;
+   padding: 1vmin;
+   margin-bottom: 1vmin;
+}

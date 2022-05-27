@@ -60,12 +60,14 @@
    position: relative;
    padding-left: 1vmin;
    text-align: left;
+   background-color: #f9f9f9;
 }
 
 .engineeringMeeting .meeting-structure .meeting-duration {
    position: relative;
    padding-left: 1vmin;
    text-align: left;
+   background-color: #f9f9f9;
 }
 
 .engineeringMeeting .meeting-structure .block .block-image {

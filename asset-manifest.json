@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/engineering-meeting/static/css/main.41e57806.css",
-    "main.js": "/engineering-meeting/static/js/main.ade414ad.js",
+    "main.css": "/engineering-meeting/static/css/main.837025f5.css",
+    "main.js": "/engineering-meeting/static/js/main.8ad5e721.js",
     "static/media/proxima-nova.otf": "/engineering-meeting/static/media/proxima-nova.7bc9ce404c297c24f210.otf",
     "index.html": "/engineering-meeting/index.html",
-    "main.41e57806.css.map": "/engineering-meeting/static/css/main.41e57806.css.map",
-    "main.ade414ad.js.map": "/engineering-meeting/static/js/main.ade414ad.js.map"
+    "main.837025f5.css.map": "/engineering-meeting/static/css/main.837025f5.css.map",
+    "main.8ad5e721.js.map": "/engineering-meeting/static/js/main.8ad5e721.js.map"
   },
   "entrypoints": [
-    "static/css/main.41e57806.css",
-    "static/js/main.ade414ad.js"
+    "static/css/main.837025f5.css",
+    "static/js/main.8ad5e721.js"
   ]
 }

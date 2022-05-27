@@ -31,7 +31,7 @@ const sketch: Sketch = (sketch: P5Instance) => {
          sketch.resizeCanvas(canvasSize.width, canvasSize.height)
 
          const data = props!.data as BuildingBlock[]
-         structure = StructureViewModel.from(data, sketch)
+         structure = StructureViewModel.from(data, sketch, canvasSize.height)
       }
    }
 }
@@ -41,7 +41,7 @@ export default function EngineeringMeetingSketch() {
    const [started, setStarted] = useState(false)
 
    if (!started) {
-      setTimeout(() => setCanvasSize({ width: $("#sketch").width()!, height: $("#sketch").height()! }), 1000)
+      setTimeout(() => setCanvasSize({ width: $("#sketch").width()!, height: $("#sketch").height()! }), 0)
       setStarted(true)
    }
 

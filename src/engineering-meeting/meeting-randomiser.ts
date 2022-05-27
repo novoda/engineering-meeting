@@ -27,7 +27,7 @@ export class MeetingRandomiser {
 }
 class BlockRandomiser {
    randomise(): BuildingBlock[] {
-      const availableBlocks = allBlocks.filter((block) => block.id !== undefined).shuffle()
+      const availableBlocks = allBlocks.shuffle()
       const blocks = []
       let maxDuration = 0
       for (let i = 0; i < availableBlocks.length && (maxDuration <= 70); i++) {

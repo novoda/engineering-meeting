@@ -1,4 +1,4 @@
-const IMAGE_PATH = `${process.env.PUBLIC_URL}/images`
+const IMAGE_PATH = `${process.env.PUBLIC_URL}/images/blocks`
 export class BuildingBlock {
     readonly id: number | undefined
     readonly name: string
@@ -33,7 +33,7 @@ export const allBlocks = [
             description: "This building block is an opportunity to showcase a particularly useful entry in the wiki.",
             purpose: "Surfacing the most useful content of the wiki and encouraging people to write more entries in the wiki.",
             duration: new Duration({ minimum: 5, maximum: 15 }),
-            imagePath: `${IMAGE_PATH}/image1.png`,
+            imagePath: `${IMAGE_PATH}/block1.png`,
         },
     ),
     new BuildingBlock(
@@ -43,7 +43,7 @@ export const allBlocks = [
             description: "This is a 5 minutes max updates for our running projects. Each team self organise to share their updates to the team.",
             purpose: "The purpose of this block is to help the team to be up to date with the events in the projects we are working on at Novoda.",
             duration: new Duration({ minimum: 15, maximum: 20 }),
-            imagePath: `${IMAGE_PATH}/image2.png`,
+            imagePath: `${IMAGE_PATH}/block2.png`,
         },
     ),
     new BuildingBlock(
@@ -53,7 +53,7 @@ export const allBlocks = [
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
-            imagePath: `${IMAGE_PATH}/image3.png`,
+            imagePath: `${IMAGE_PATH}/block3.png`,
         },
     ),
     new BuildingBlock(
@@ -63,7 +63,7 @@ export const allBlocks = [
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
-            imagePath: `${IMAGE_PATH}/image4.png`,
+            imagePath: `${IMAGE_PATH}/block4.png`,
         },
     ),
     new BuildingBlock(
@@ -83,7 +83,7 @@ export const allBlocks = [
             description: "This building block is about knowledge sharing. You can share everything you find interesting.\nJust entry the topic you would like to discuss and the most voted one will be presented.",
             purpose: "Sharing is caring. The idea is to create an engaging place on which we can gather to share our learning with our colleagues.",
             duration: new Duration({ minimum: 20, maximum: 30 }),
-            imagePath: `${IMAGE_PATH}/image6.png`,
+            imagePath: `${IMAGE_PATH}/block6.png`,
         },
     ),
     new BuildingBlock(
@@ -93,7 +93,7 @@ export const allBlocks = [
             description: "This building block is about celebration around failure and the learning associated to that.\nEveryone should have thought about their own failures and ready for sharing it as a group. \nA roulette will dictate the person sharing their failures.",
             purpose: "To be able to share failure stories and celebrate the leanings associated to them.\nIt’s OK to fail.Failure is part of learning.This building block help us to  be conscious about that.",
             duration: new Duration({ minimum: 5, maximum: 10 }),
-            imagePath: `${IMAGE_PATH}/image7.png`,
+            imagePath: `${IMAGE_PATH}/block7.png`,
         },
     ),
     new BuildingBlock(
@@ -103,7 +103,7 @@ export const allBlocks = [
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
-            imagePath: `${IMAGE_PATH}/image8.png`,
+            imagePath: `${IMAGE_PATH}/block8.png`,
         },
     ),
     new BuildingBlock(
@@ -113,7 +113,7 @@ export const allBlocks = [
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
-            imagePath: `${IMAGE_PATH}/image9.png`,
+            imagePath: `${IMAGE_PATH}/block9.png`,
         },
     ),
     new BuildingBlock(
@@ -123,7 +123,7 @@ export const allBlocks = [
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
-            imagePath: `${IMAGE_PATH}/image10.png`,
+            imagePath: `${IMAGE_PATH}/block10.png`,
         },
     ),
     new BuildingBlock(
@@ -133,7 +133,7 @@ export const allBlocks = [
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
-            imagePath: `${IMAGE_PATH}/image11.png`,
+            imagePath: `${IMAGE_PATH}/block11.png`,
         },
     ),
     new BuildingBlock(
@@ -143,7 +143,7 @@ export const allBlocks = [
             description: "???",
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
-            imagePath: `${IMAGE_PATH}/image12.png`,
+            imagePath: `${IMAGE_PATH}/block12.png`,
         },
     ),
-]
+].filter(block => block.id !== undefined)

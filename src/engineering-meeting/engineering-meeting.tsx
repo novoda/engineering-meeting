@@ -44,15 +44,15 @@ export default function EngineeringMeeting() {
       <SketchProvider.Provider value={blocks}>
          <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover" />
          <a href="https://github.com/novoda/engineering-meeting">
-            <img className="logo" src={`${process.env.PUBLIC_URL}/images/novoda.png`} alt="Novoda" exclude-from-screenshot="" />
+            <img className="logo" src={`${process.env.PUBLIC_URL}/images/novoda.png`} alt="Novoda" exclude-from-screenshot="yes" />
          </a>
          <div id="meeting" className="engineeringMeeting">
             <div className="sketch-view">
                <div onClick={structureToClipboard}>
-                  <img className="click" src={`${process.env.PUBLIC_URL}/images/click-here-to-copy.png`} alt="Copy" exclude-from-screenshot="" />
+                  <img className="click" src={`${process.env.PUBLIC_URL}/images/click-here-to-copy.png`} alt="Copy" exclude-from-screenshot="yes" />
                   <EngineeringMeetingSketch />
                </div>
-               <button className="randomiseButton" onClick={randomise} exclude-from-screenshot="">
+               <button className="randomiseButton" onClick={randomise} exclude-from-screenshot="yes">
                   Randomise
                </button>
                <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true} />

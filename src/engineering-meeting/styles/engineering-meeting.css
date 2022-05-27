@@ -56,6 +56,18 @@
    align-self: center;
 }
 
+.engineeringMeeting .meeting-structure .meeting-name {
+   position: relative;
+   padding-left: 1vmin;
+   text-align: left;
+}
+
+.engineeringMeeting .meeting-structure .meeting-duration {
+   position: relative;
+   padding-left: 1vmin;
+   text-align: left;
+}
+
 .engineeringMeeting .meeting-structure .block .block-image {
    width: 10vmin;
    height: auto;
@@ -95,5 +107,8 @@
 
    .engineeringMeeting .meeting-structure {
       width: 100vw;
+      padding-left: 4vmin;
+      padding-right: 4vmin;
+      padding-bottom: 4vmin;
    }
 }

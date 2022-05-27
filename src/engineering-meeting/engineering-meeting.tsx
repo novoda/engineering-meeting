@@ -1,20 +1,27 @@
 import { useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import { BlockRandomiser } from "./block-randomiser"
+import { BuildingBlock } from "./building-block"
 import {} from "./extensions"
+import { MeetingRandomiser } from "./meeting-randomiser"
 import { ScreenshotTaker } from "./screenshot-taker"
 import EngineeringMeetingSketch from "./sketch/sketch"
 import SketchProvider from "./sketch/sketch-provider"
 import "./styles/engineering-meeting.css"
 
 export default function EngineeringMeeting() {
-   const randomiser = new BlockRandomiser()
+   const randomiser = MeetingRandomiser.create()
+   const initialMeeting = randomiser.randomise()
    const screenshotTaker = new ScreenshotTaker()
-   const [blocks, setBlocks] = useState(randomiser.randomise())
+   const [blocks, setBlocks] = useState<BuildingBlock[]>(initialMeeting.blocks)
+   const [name, setName] = useState<string>(initialMeeting.name)
+   const [duration, setDuration] = useState<string>(initialMeeting.duration)
 
    async function randomise() {
-      setBlocks(randomiser.randomise())
+      const meeting = randomiser.randomise()
+      setName(meeting.name)
+      setBlocks(meeting.blocks)
+      setDuration(meeting.duration)
    }
 
    async function structureToClipboard() {
@@ -51,11 +58,12 @@ export default function EngineeringMeeting() {
                <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true} />
             </div>
             <div className="meeting-structure">
+               <h2 className="meeting-name">{name}</h2>
                {[...blocks!].reverse().map((block) => (
                   <section key={block.id} className="block">
                      <img className="block-image" src={block.imagePath} alt={block.name} />
                      <div className="block-details">
-                        <h1 className="block-name">{block.name}</h1>
+                        <h3 className="block-name">{block.name}</h3>
                         <p className="block-description">
                            <b>Description:</b> {block.description}
                         </p>
@@ -68,6 +76,9 @@ export default function EngineeringMeeting() {
                      </div>
                   </section>
                ))}
+               <p className="meeting-duration">
+                  <b>Estimated duration:</b> {duration}
+               </p>
             </div>
          </div>
       </SketchProvider.Provider>

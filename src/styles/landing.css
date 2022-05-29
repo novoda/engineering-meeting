@@ -27,3 +27,8 @@ html {
    padding: 1vmin;
    margin-bottom: 1vmin;
 }
+
+.welcome .generate .navigateTo {
+   text-decoration: none;
+   color: black;
+}

@@ -10,8 +10,8 @@ export default function Landing() {
          <div className="welcome">
             <img className="meeting-logo" src={`${process.env.PUBLIC_URL}/images/structure.png`} alt="Engineering Meeting" />
             <button className="generate">
-               <Link to="/randomiser" style={{ textDecoration: "none" }}>
-                  Generate Meeting
+               <Link className="navigateTo" to="/randomiser">
+                  <b>Generate Meeting</b>
                </Link>
             </button>
          </div>

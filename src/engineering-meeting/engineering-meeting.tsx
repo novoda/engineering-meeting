@@ -53,7 +53,7 @@ export default function EngineeringMeeting() {
                   <EngineeringMeetingSketch />
                </div>
                <button className="randomiseButton" onClick={randomise} exclude-from-screenshot="yes">
-                  Randomise
+                  <b>Randomise</b>
                </button>
                <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true} />
             </div>

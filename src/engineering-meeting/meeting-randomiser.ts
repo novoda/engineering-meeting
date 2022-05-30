@@ -51,16 +51,18 @@ class NameRandomiser {
       'Date Night', 'Cooking Night', 'Game Night', 'Friendship', 'Fiendship', 'Status Quo', 'Bono', 'Raider\'s', 'Hawking', 'Spock', 'Euclid', 'Gauss', 'Eisenstein', 'Einstein', 'Feynmann', 'Lewis', 'Gru',
       'Ana', 'Jozef', 'Frank', 'Diogo', 'Michal', 'Carl', 'Pablo', 'Juan', 'Giuseppe', 'Richard', 'Ben', 'Januz', 'Laith', 'Baris', 'Ken', 'Lukasz', 'Laurie', 'Adam', 'Ataul', 'Paul', 'Xavi', 'Antonio',
       'Soundcloud', 'Channel 4', 'Hopin', 'Glovo', 'Vodafone', 'Tesco', 'Huddle', 'All4', 'Tantalum', 'Charlotte & Tiltbury', 'Blu', 'Depict', 'Body Coach']
-   private terms = ['Initiation', 'Equivalency', 'Equivalence Relation', 'Equivalence Solution', 'Solution', 'Test', 'Maneuver', 'Acquisition', 'Formulation', 'Contraction', 'Expansion', 'Factor', 'Reccurence',
-      'Diffusion', 'Disintegration', 'Transformation', 'Vortex', 'Malfunction', 'Coefficient', 'Convergence', 'Divergence', 'Limit', 'Excitation', 'Acceleration', 'Attraction', 'Repulsion', 'Pulse', 'Proximity Test',
-      'Resonance', 'Minimization', 'Insufficiency', 'Thermalization', 'Detoriation', 'Transmission', 'Incursion', 'Combustion', 'Estimation', 'Optimization', 'Sublimation', 'Reverberation', 'Permutation', 'Materialization',
-      'Submergence', 'Exfoliation', 'Oscillation', 'Fluctuation', 'Application', 'Synthesis', 'Hysteresis', 'Path', 'Graph', 'Summation', 'Deviation', 'Automation', 'Evaporation', 'Condensation', 'Asymmetry', 'Conundrum',
-      'Agitation', 'Regulation', 'Dissonance', 'Harmony', 'Initiative', 'Effect', 'Problem', 'Instability', 'Stability Test', 'Vaporization', 'Paradox', 'Number', 'Annhilation', 'Anomaly', 'Quirk',
-      'Manipulation', 'Justification', 'Process', 'Recoil', 'Triangulation', 'Algorithm', 'Program', 'Reaction', 'Lemma', 'Postulate', 'Theorem', 'Homomorphism', 'Infatuation', 'Extravaganza', 'Journey',
-      'Fallacy', 'Decoupling', 'Polarization', 'Paradigm', 'Correlation', 'Measurement', 'Alternative', 'Simplex', 'Manifold', 'Curvature', 'Tensor', 'Dimension', 'Normalization', 'Renormalization',
-      'Extrapolation', 'Decay', 'Experiment', 'Explosion', 'Inflammation', 'Incubation', 'Ingestion', 'Agitation', 'Derivation', 'Interuption', 'Freezing Point', 'Boiling Point', 'Gestation', 'Migration',
-      'Fragmentation', 'Conjecture', 'Reflection', 'Recalibration', 'Expedition', 'Emanation', 'Incursion', 'Hypothesis', 'Corollary', 'Transaction', 'Entanglement', 'Saturation', 'Deficiency', 'Displacement',
-      'Contamination', 'Isotope', 'Dissipation', 'Integration', 'Diversion', 'Approximation', 'Catalyst', 'Pull Request', 'Bug', 'Feature Request', 'Github Issue', 'Rebase', 'Bisection', 'Commit', 'Merge']
+   private terms = ['Initiation', 'Equivalency', 'Equivalence Relation', 'Equivalence Solution', 'Solution', 'Test', 'Integration Test', 'Unit Test', 'UI Test', 'Automated Test', 'Maneuver', 'Acquisition', 'Formulation',
+      'Extension Function', 'Expansion', 'Factor', 'Transformation', 'Malfunction', 'Coefficient', 'Convergence', 'Divergence', 'Limit', 'Proximity Test', 'Minimization', 'Insufficiency', 'Estimation', 'Optimization',
+      'Permutation', 'Application', 'Synthesis', 'Path', 'Graph', 'Initiative', 'Effect', 'Problem', 'Instability', 'Stability Test', 'Paradox', 'Number', 'Anomaly', 'Quirk', 'Manipulation', 'Justification', 'Process',
+      'Triangulation', 'Algorithm', 'Program', 'Side Effect', 'Fallacy', 'Decoupling', 'Paradigm', 'Correlation', 'Measurement', 'Alternative', 'Simplex', 'Animation', 'Tensor', 'Dimension', 'Normalization', 'Renormalization',
+      'Experiment', 'Migration', 'Fragmentation', 'Deficiency', 'Displacement', 'Contamination', 'Isotope', 'Dissipation', 'Integration', 'Diversion', 'Approximation', 'Catalyst', 'Pull Request', 'Bug', 'Feature Request',
+      'Github Issue', 'Rebase', 'Bisection', 'Commit', 'Merge', 'Refactor', 'Monad', 'JIRA Ticket', 'Sprint', 'Retrospective', 'Ternary Operator', 'Switch', 'Sealed Class', 'Sealed Interface', 'Sealed Enum', 'Sealed Object',
+      'Sealed Function', 'Sealed Method', 'Data Class', 'Interface', 'Enum', 'Object', 'Function', 'Method', 'Programming Language', 'Coroutine', 'Promise', 'Flow', 'Boolean', 'Integer', 'Double', 'String', 'JSON', 'XML', 'YAML',
+      'Neural Network', 'For Loop', 'FlatMap', 'Script', 'Kata', 'Pair Programming Session', 'Arrow Function', 'Configuration File', 'Feature', 'Estimation', 'Spike', 'Memory Leak', 'Regular Expression', 'Arithmetic Operator',
+      'Array', 'HashMap', 'List', 'Set', 'Bitwise Operator', 'Callback', 'Listener', 'Design Pattern', 'Source Code', 'Cocoa Pod', 'Software Component', 'Concurrency', 'Curly Bracket', 'Data Structure', 'Binary Tree',
+      'Deprecated Variable', 'Deprecated Function', 'Deprecated Method', 'Deprecated Class', 'Deprecated Constant', 'Git Command', 'Loop', 'Expression', 'Library', 'Dependency', 'Stand Up', 'Private Property', 'Public Property',
+      'Private Function', 'Public Function', 'Nested Class', 'Exception', 'Stack Trace', 'Syntax Error', 'Compiler Error', 'Runtime Error', 'Branch'
+   ]
    private adjectives = ['Aquatic', 'Romantic', 'Funny', 'Futuristic', 'Big', 'Tiny', 'Small', 'Dummy', 'Fantastic', 'Complicated', 'Extraordinary', 'Toxic', 'Magnificient', 'Fantabulous', 'Weird', 'Expensive',
       'Perfect', 'Calm', 'Senseless', 'Paranormal', 'Incredible', 'Accurate', 'Aggresive', 'Ancient', 'New', 'Bright', 'Colorful', 'Cute', 'Deep', 'Dark', 'Elegant', 'Fancy', 'Huge', 'Impossible', 'Important']
 

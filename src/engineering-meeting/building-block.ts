@@ -98,11 +98,11 @@ export const allBlocks = [
     ),
     new BuildingBlock(
         {
-            id: undefined,
-            name: "???",
-            description: "???",
-            purpose: "???",
-            duration: new Duration({ minimum: 20, maximum: 30 }),
+            id: 8,
+            name: "Quick Wins",
+            description: "Lets celebrate our wins as a department too, regardless if they’re big or small, or if there’s a lesson to share or not",
+            purpose: "Integrate the celebration of success into the Eng department more",
+            duration: new Duration({ minimum: 5, maximum: 10 }),
             imagePath: `${IMAGE_PATH}/block8.png`,
         },
     ),

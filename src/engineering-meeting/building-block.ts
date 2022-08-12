@@ -6,13 +6,15 @@ export class BuildingBlock {
     readonly purpose: string
     readonly duration: Duration
     readonly imagePath: string
-    constructor({ id, name, description, purpose, duration, imagePath }: { id: number | undefined; name: string; description: string; purpose: string; duration: Duration; imagePath: string }) {
+    readonly isRequired: boolean
+    constructor({ id, name, description, purpose, duration, imagePath, isRequired }: { id: number | undefined; name: string; description: string; purpose: string; duration: Duration; imagePath: string; isRequired: boolean }) {
         this.id = id
         this.name = name
         this.description = description
         this.purpose = purpose
         this.duration = duration
         this.imagePath = imagePath
+        this.isRequired = isRequired
     }
 }
 
@@ -34,6 +36,7 @@ export const allBlocks = [
             purpose: "Surfacing the most useful content of the wiki and encouraging people to write more entries in the wiki.",
             duration: new Duration({ minimum: 5, maximum: 15 }),
             imagePath: `${IMAGE_PATH}/block1.png`,
+            isRequired: false,
         },
     ),
     new BuildingBlock(
@@ -44,6 +47,7 @@ export const allBlocks = [
             purpose: "The purpose of this block is to help the team to be up to date with the events in the projects we are working on at Novoda.",
             duration: new Duration({ minimum: 15, maximum: 20 }),
             imagePath: `${IMAGE_PATH}/block2.png`,
+            isRequired: true,
         },
     ),
     new BuildingBlock(
@@ -54,6 +58,7 @@ export const allBlocks = [
             purpose: "We share ideas about tools that we use for work.",
             duration: new Duration({ minimum: 5, maximum: 15 }),
             imagePath: `${IMAGE_PATH}/block3.png`,
+            isRequired: false,
         },
     ),
     new BuildingBlock(
@@ -64,6 +69,7 @@ export const allBlocks = [
             purpose: "H&T  sharing.",
             duration: new Duration({ minimum: 20, maximum: 30 }),
             imagePath: `${IMAGE_PATH}/block4.png`,
+            isRequired: false,
         },
     ),
     new BuildingBlock(
@@ -74,6 +80,7 @@ export const allBlocks = [
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
             imagePath: `${IMAGE_PATH}image5.png`,
+            isRequired: false,
         },
     ),
     new BuildingBlock(
@@ -84,6 +91,7 @@ export const allBlocks = [
             purpose: "Sharing is caring. The idea is to create an engaging place on which we can gather to share our learning with our colleagues.",
             duration: new Duration({ minimum: 20, maximum: 30 }),
             imagePath: `${IMAGE_PATH}/block6.png`,
+            isRequired: false,
         },
     ),
     new BuildingBlock(
@@ -94,6 +102,7 @@ export const allBlocks = [
             purpose: "To be able to share failure stories and celebrate the leanings associated to them.\nIt’s OK to fail.Failure is part of learning.This building block help us to  be conscious about that.",
             duration: new Duration({ minimum: 5, maximum: 10 }),
             imagePath: `${IMAGE_PATH}/block7.png`,
+            isRequired: false,
         },
     ),
     new BuildingBlock(
@@ -104,6 +113,7 @@ export const allBlocks = [
             purpose: "Integrate the celebration of success into the Eng department more",
             duration: new Duration({ minimum: 5, maximum: 10 }),
             imagePath: `${IMAGE_PATH}/block8.png`,
+            isRequired: false,
         },
     ),
     new BuildingBlock(
@@ -114,6 +124,7 @@ export const allBlocks = [
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
             imagePath: `${IMAGE_PATH}/block9.png`,
+            isRequired: false,
         },
     ),
     new BuildingBlock(
@@ -124,6 +135,7 @@ export const allBlocks = [
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
             imagePath: `${IMAGE_PATH}/block10.png`,
+            isRequired: false,
         },
     ),
     new BuildingBlock(
@@ -134,6 +146,7 @@ export const allBlocks = [
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
             imagePath: `${IMAGE_PATH}/block11.png`,
+            isRequired: false,
         },
     ),
     new BuildingBlock(
@@ -144,6 +157,7 @@ export const allBlocks = [
             purpose: "???",
             duration: new Duration({ minimum: 20, maximum: 30 }),
             imagePath: `${IMAGE_PATH}/block12.png`,
+            isRequired: false,
         },
     ),
 ].filter(block => block.id !== undefined)

@@ -16,26 +16,53 @@ export class MeetingRandomiser {
       this.nameRandomiser = nameRandomiser
    }
 
-   randomise(): { name: string, blocks: BuildingBlock[], duration: string } {
+randomise(): { name: string, blocks: BuildingBlock[], duration: string, generatedDate: string } {
       const name = this.nameRandomiser.randomise()
       const blocks = this.blockRandomiser.randomise()
       const durationMin = blocks.reduce((acc, block) => acc + block.duration.minimum, 0)
       const durationMax = blocks.reduce((acc, block) => acc + block.duration.maximum, 0)
       const duration = `${durationMin} - ${durationMax} minutes`
-      return { name, blocks, duration }
+      const generatedDate = getDateTime()
+      return { name, blocks, duration, generatedDate }
    }
 }
 class BlockRandomiser {
    randomise(): BuildingBlock[] {
-      const availableBlocks = allBlocks.shuffle()
-      const blocks = []
+      const blocks = allRequiredBlocks()
+
       let maxDuration = 0
+      blocks.forEach(function (block){
+         maxDuration = maxDuration + block.duration.maximum
+      })
+      
+      const availableBlocks = allBlocks.filter(isNotRequiredBlock).shuffle()
       for (let i = 0; i < availableBlocks.length && (maxDuration <= 70); i++) {
-         blocks.push(availableBlocks[i])
-         maxDuration += availableBlocks[i].duration.maximum
+         const selectedBlock = availableBlocks[i]
+         blocks.push(selectedBlock)
+         maxDuration += selectedBlock.duration.maximum
       }
-      return blocks
+      return blocks.shuffle()
    }
+}
+
+function allRequiredBlocks() {
+   return allBlocks.filter(isRequiredBlock)
+}
+
+function isRequiredBlock(block: BuildingBlock) { 
+   return (block.isRequired); 
+} 
+
+function isNotRequiredBlock(block: BuildingBlock) { 
+   return (!block.isRequired); 
+} 
+
+function getDateTime(): string {
+   const date = new Date()
+   const year = date.getFullYear()
+   const month = date.getMonth()
+   const day = date.getDay()
+   return "Date Generated: " + day + " / " + month + " / " + year      
 }
 
 class NameRandomiser {

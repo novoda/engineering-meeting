@@ -36,9 +36,15 @@ HTMLCanvasElement.prototype.toClipboard = function (this: HTMLCanvasElement, { o
 
     const { clipboard } = navigator
     if (clipboard) {
-        clipboard.write([new ClipboardItem({ "image/png": data() })])
+        // TODO identify user browser? on firefox -> try another copy-paste mechanism, else warn user.
+        try { 
+            clipboard.write([new ClipboardItem({ "image/png": data() })])
             .then(() => onSuccess())
             .catch(() => onFailure());
+        } catch {
+            onFailure();
+        }
+        
     } else {
         onFailure();
     }

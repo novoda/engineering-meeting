@@ -16,12 +16,14 @@ export default function EngineeringMeeting() {
    const [blocks, setBlocks] = useState<BuildingBlock[]>(initialMeeting.blocks)
    const [name, setName] = useState<string>(initialMeeting.name)
    const [duration, setDuration] = useState<string>(initialMeeting.duration)
+   const [date, setDate] = useState<string>(initialMeeting.generatedDate)
 
    async function randomise() {
       const meeting = randomiser.randomise()
       setName(meeting.name)
       setBlocks(meeting.blocks)
       setDuration(meeting.duration)
+      setDate(meeting.generatedDate)
    }
 
    async function structureToClipboard() {
@@ -52,6 +54,7 @@ export default function EngineeringMeeting() {
                   <img className="click" src={`${process.env.PUBLIC_URL}/images/click-here-to-copy.png`} alt="Copy" exclude-from-screenshot="yes" />
                   <EngineeringMeetingSketch />
                </div>
+               <b><span id="date-generated">{date}</span></b>
                <button className="randomiseButton" onClick={randomise} exclude-from-screenshot="yes">
                   <b>Randomise</b>
                </button>

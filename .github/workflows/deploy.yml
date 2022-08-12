@@ -8,18 +8,19 @@ on:
       - './public/**'
 
 jobs:
-  runs-on: ubuntu-latest
-  name: Deploy on merge to main
-  steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy on merge to main
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
 
-    - name: Build
-      working-directory: ./
-      run: npm run build
+      - name: Build
+        working-directory: ./
+        run: npm run build
 
-    - name: Deploy
-      working-directory: ./
-      run: npm run deploy
+      - name: Deploy
+        working-directory: ./
+        run: npm run deploy

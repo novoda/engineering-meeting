@@ -36,9 +36,14 @@ HTMLCanvasElement.prototype.toClipboard = function (this: HTMLCanvasElement, { o
 
     const { clipboard } = navigator
     if (clipboard) {
-        clipboard.write([new ClipboardItem({ "image/png": data() })])
+        try { 
+            clipboard.write([new ClipboardItem({ "image/png": data() })])
             .then(() => onSuccess())
             .catch(() => onFailure());
+        } catch {
+            onFailure();
+        }
+        
     } else {
         onFailure();
     }

@@ -16,7 +16,7 @@ export class MeetingRandomiser {
       this.nameRandomiser = nameRandomiser
    }
 
-randomise(): { name: string, blocks: BuildingBlock[], duration: string, generatedDate: string } {
+   randomise(): { name: string, blocks: BuildingBlock[], duration: string, generatedDate: string } {
       const name = this.nameRandomiser.randomise()
       const blocks = this.blockRandomiser.randomise()
       const durationMin = blocks.reduce((acc, block) => acc + block.duration.minimum, 0)

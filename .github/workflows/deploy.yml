@@ -13,6 +13,9 @@ jobs:
     name: Deploy on merge to main
     steps:
       - uses: actions/checkout@v3
+      - run: git config --global user.email "engineering@novoda.com"
+      - run: git config --global user.name "Novoda"
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16

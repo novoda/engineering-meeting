@@ -36,7 +36,7 @@ export const allBlocks = [
             purpose: "Surfacing the most useful content of the wiki and encouraging people to write more entries in the wiki.",
             duration: new Duration({ minimum: 5, maximum: 15 }),
             imagePath: `${IMAGE_PATH}/block1.png`,
-            isRequired: true,
+            isRequired: false,
         },
     ),
     new BuildingBlock(

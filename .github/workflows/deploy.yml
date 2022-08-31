@@ -5,7 +5,10 @@ on:
       - main
     paths:
     - 'src/**'
-    - 'public/**'
+    - 'public/**' 
+    
+permissions:
+  contents: write
 
 jobs:
   deploy:
@@ -29,5 +32,7 @@ jobs:
         run: npm run build
 
       - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
         working-directory: ./
-        run: npm run deploy
+        with: 
+          folder: build

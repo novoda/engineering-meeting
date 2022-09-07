@@ -59,10 +59,7 @@ function isNotRequiredBlock(block: BuildingBlock) {
 
 function getDateTime(): string {
    const date = new Date()
-   const year = date.getFullYear()
-   const month = date.getMonth()
-   const day = date.getDay()
-   return "Date Generated: " + day + " / " + month + " / " + year      
+   return "Date Generated: " + date.toLocaleString()
 }
 
 class NameRandomiser {

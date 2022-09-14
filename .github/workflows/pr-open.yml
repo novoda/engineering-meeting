@@ -1,0 +1,30 @@
+name: Lint check on PR open
+on:
+  pull-request:
+    branches:
+      - main
+    paths:
+    - 'src/**'
+    - 'public/**' 
+    
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Lint check on PR open
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+ 
+      - name: Install dependencies
+        working-directory: ./
+        run: npm install
+
+      - name: Run ESLint
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
+      

@@ -31,12 +31,12 @@ class BlockRandomiser {
       const blocks = allRequiredBlocks()
 
       let maxDuration = 0
-      blocks.forEach(function (block){
-         maxDuration = maxDuration + block.duration.maximum
+      blocks.forEach((block) => {
+         maxDuration += block.duration.maximum
       })
-      
+
       const availableBlocks = allBlocks.filter(isNotRequiredBlock).shuffle()
-      for (let i = 0; i < availableBlocks.length && (maxDuration <= 70); i++) {
+      for (let i = 0; i < availableBlocks.length && (maxDuration <= 65 && blocks.length !== 4); i++) {
          const selectedBlock = availableBlocks[i]
          blocks.push(selectedBlock)
          maxDuration += selectedBlock.duration.maximum
@@ -49,17 +49,17 @@ function allRequiredBlocks() {
    return allBlocks.filter(isRequiredBlock)
 }
 
-function isRequiredBlock(block: BuildingBlock) { 
-   return (block.isRequired); 
-} 
+function isRequiredBlock(block: BuildingBlock) {
+   return (block.isRequired);
+}
 
-function isNotRequiredBlock(block: BuildingBlock) { 
-   return (!block.isRequired); 
-} 
+function isNotRequiredBlock(block: BuildingBlock) {
+   return (!block.isRequired);
+}
 
 function getDateTime(): string {
    const date = new Date()
-   return "Date Generated: " + date.toLocaleString()
+   return date.toLocaleString()
 }
 
 class NameRandomiser {

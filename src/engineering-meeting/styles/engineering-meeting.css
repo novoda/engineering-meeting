@@ -27,6 +27,7 @@
 .engineeringMeeting .sketch-view {
    display: flex;
    flex-direction: column;
+   align-self: center;
 }
 
 .engineeringMeeting .sketch-view .EngineeringMeetingSketch {
@@ -65,6 +66,13 @@
 }
 
 .engineeringMeeting .meeting-structure .meeting-duration {
+   position: relative;
+   padding-left: 1vmin;
+   text-align: left;
+   background-color: #f9f9f9;
+}
+
+.engineeringMeeting .meeting-structure .meeting-date {
    position: relative;
    padding-left: 1vmin;
    text-align: left;

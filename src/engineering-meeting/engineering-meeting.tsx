@@ -54,7 +54,6 @@ export default function EngineeringMeeting() {
                   <img className="click" src={`${process.env.PUBLIC_URL}/images/click-here-to-copy.png`} alt="Copy" exclude-from-screenshot="yes" />
                   <EngineeringMeetingSketch />
                </div>
-               <b><span id="date-generated">{date}</span></b>
                <button className="randomiseButton" onClick={randomise} exclude-from-screenshot="yes">
                   <b>Randomise</b>
                </button>
@@ -81,6 +80,9 @@ export default function EngineeringMeeting() {
                ))}
                <p className="meeting-duration">
                   <b>Estimated duration:</b> {duration}
+               </p>
+               <p className="meeting-date">
+                  <b>Date:</b> {date}
                </p>
             </div>
          </div>

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { BuildingBlock } from "./building-block"
@@ -17,6 +17,7 @@ export default function EngineeringMeeting() {
    const [name, setName] = useState<string>(initialMeeting.name)
    const [duration, setDuration] = useState<string>(initialMeeting.duration)
    const [date, setDate] = useState<string>(initialMeeting.generatedDate)
+   const [meetingUrl, setImage] = useState<string>()
 
    async function randomise() {
       const meeting = randomiser.randomise()
@@ -24,6 +25,18 @@ export default function EngineeringMeeting() {
       setBlocks(meeting.blocks)
       setDuration(meeting.duration)
       setDate(meeting.generatedDate)
+   }
+
+   async function fetchImage() {
+      const result = await fetch(
+         `https://novoda-dreams.loca.lt/dreams?prompt="${name} made of lego bricks. Trending on artstation. Beautiful. Good in details"`,
+         {
+            headers: { "Bypass-Tunnel-Reminder": "" },
+         }
+      )
+      const blob = await result.blob()
+      const imageObjectURL = URL.createObjectURL(blob)
+      setImage(imageObjectURL)
    }
 
    async function structureToClipboard() {
@@ -42,6 +55,15 @@ export default function EngineeringMeeting() {
       )
    }
 
+   useEffect(() => {
+      fetchImage()
+   }, [name])
+
+   // 1. Manual fetch of the image that we want to display
+   // 2. We need to store the result of the fetch into a blob object
+   // 3. We need to pass the blob to the `src` property on the img tag
+   // Optional (for the future). Before trying to fetch the image using the dreams API, check if the dreams API is enabled (as a sort of feature flag) otherwise do nothing and operate as normal.
+
    return (
       <SketchProvider.Provider value={blocks}>
          <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover" />
@@ -52,7 +74,11 @@ export default function EngineeringMeeting() {
             <div className="sketch-view">
                <div onClick={structureToClipboard}>
                   <img className="click" src={`${process.env.PUBLIC_URL}/images/click-here-to-copy.png`} alt="Copy" exclude-from-screenshot="yes" />
-                  <EngineeringMeetingSketch />
+                  <h2 className="meeting-name">{name}</h2>
+                  <div className="sketch-group">
+                     <img className="sketch-image" src={meetingUrl} width="512" height="512" alt={name} />
+                     <EngineeringMeetingSketch />
+                  </div>
                </div>
                <button className="randomiseButton" onClick={randomise} exclude-from-screenshot="yes">
                   <b>Randomise</b>
@@ -60,7 +86,6 @@ export default function EngineeringMeeting() {
                <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true} />
             </div>
             <div className="meeting-structure">
-               <h2 className="meeting-name">{name}</h2>
                {[...blocks!].reverse().map((block) => (
                   <section key={block.id} className="block">
                      <img className="block-image" src={block.imagePath} alt={block.name} />

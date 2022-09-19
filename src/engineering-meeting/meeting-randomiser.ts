@@ -95,6 +95,7 @@ class NameRandomiser {
       const noun = this.nouns[Math.floor(Math.random() * this.nouns.length)]
       const term = this.terms[Math.floor(Math.random() * this.terms.length)]
 
-      return `The ${adjective} ${noun} ${term}`
+      const names = ["The programming Frog", "The pinguin hacker", "The lazy pug", "The post apocalyptic cat"]
+      return names[Math.floor(Math.random() * names.length)]
    }
 }

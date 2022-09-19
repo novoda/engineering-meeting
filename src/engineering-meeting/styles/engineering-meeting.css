@@ -30,8 +30,17 @@
    align-self: center;
 }
 
+.engineeringMeeting .sketch-view .sketch-group {
+   display: flex;
+   flex-direction: row;
+   align-self: center;
+   vertical-align: middle;
+}
+
 .engineeringMeeting .sketch-view .EngineeringMeetingSketch {
    padding-bottom: 2vmin;
+   height: 512px;
+   width: 512px;
 }
 
 .engineeringMeeting .sketch-view .randomiseButton {
@@ -93,7 +102,7 @@
 
 @media (orientation: landscape) {
    .engineeringMeeting {
-      flex-direction: row;
+      flex-direction: column;
    }
 
    .engineeringMeeting .sketch-view .EngineeringMeetingSketch {

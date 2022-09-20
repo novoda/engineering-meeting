@@ -13,11 +13,11 @@ import { FidgetSpinner } from 'react-loader-spinner'
 export default function EngineeringMeeting() {
    const randomiser = MeetingRandomiser.create()
    const screenshotTaker = new ScreenshotTaker()
-   const [uiState, setState] = useState<UiState>(randomContent(randomiser))
+   const [uiState, setState] = useState<UiState>(new Initial())
 
    async function randomise() {
       setState(new Loading())
-      await timeout(3000) // TODO remove fake delay when real long-running action is added
+      await timeout(1000) // TODO remove fake delay when real long-running action is added
       setState(randomContent(randomiser))
    }
 
@@ -38,7 +38,8 @@ export default function EngineeringMeeting() {
       )
    }
 
-   switch (uiState.type) {
+   switch (uiState?.type) {
+      case "initial": randomise(); return loading()
       case "loading": return loading()
       case "content": return content(uiState, structureToClipboard, randomise)
       case "error": return error()
@@ -135,8 +136,11 @@ function randomContent(randomiser: MeetingRandomiser): Content {
    )
 }
 
-type UiState = Loading | Error | Content
+type UiState = Loading | Error | Content | Initial
 
+class Initial {
+   readonly type: "initial" = "initial"
+}
 class Loading {
    readonly type: "loading" = "loading"
 }

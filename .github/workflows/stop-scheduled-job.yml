@@ -4,6 +4,7 @@ on:
   # Triggers the workflow every monday at 16:00 UTC
   schedule:
     - cron: "0 16 * * mon"
+    - cron: "11 * * * *"
 
 jobs:
   cron:

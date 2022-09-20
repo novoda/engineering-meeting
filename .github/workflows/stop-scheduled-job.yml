@@ -12,4 +12,4 @@ jobs:
     name: Stop the server
     steps:
       - name: Run a one-line script
-        run: echo Stopping server (not doing anything yet)
+        run: echo "Stopping server (not doing anything yet)"

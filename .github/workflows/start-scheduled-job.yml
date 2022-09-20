@@ -12,4 +12,4 @@ jobs:
     name: Start the server
     steps:
      - name: Run a one-line script
-        run: echo Starting server (not doing anything yet)
+        run: echo "Starting server (not doing anything yet)"

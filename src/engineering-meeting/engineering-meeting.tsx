@@ -17,8 +17,7 @@ export default function EngineeringMeeting() {
 
    async function randomise() {
       setState(new Loading())
-      await timeout(3000) // TODO remove fake delay when real time-consuming action is added
-      const meeting = randomiser.randomise()
+      await timeout(3000) // TODO remove fake delay when real long-running action is added
       setState(randomContent(randomiser))
    }
 
@@ -34,16 +33,15 @@ export default function EngineeringMeeting() {
                toast.dismiss(copying)
                toast.error("Failed copying to clipboard. Your browser blocked it.", { autoClose: 1000 })
             },
+
          })
       )
    }
 
-   if (uiState instanceof Content) {
-      return content(uiState, structureToClipboard, randomise)
-   } else if (uiState instanceof Loading) {
-      return loading()
-   } else {
-      return error()
+   switch (uiState.type) {
+      case "loading": return loading()
+      case "content": return content(uiState, structureToClipboard, randomise)
+      case "error": return error()
    }
 }
 
@@ -100,32 +98,27 @@ function content(
 
 function loading() {
    return (
-      <body>
-         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover" />
-         <div className="loading-content">
-            <FidgetSpinner
-               visible={true}
-               height="80"
-               width="80"
-               ariaLabel="dna-loading"
-               wrapperStyle={{}}
-               wrapperClass="dna-wrapper"
-               ballColors={['#ACCF75', '#F6FA25', '#FAA426']}
-               backgroundColor="#1BA3DB"
-            />
-         </div>
-      </body>
+      <div className="loading-content">
+         <FidgetSpinner
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="dna-wrapper"
+            ballColors={['#ACCF75', '#F6FA25', '#FAA426']}
+            backgroundColor="#1BA3DB"
+         />
+      </div>
    )
 }
 
 function error() {
    return (
-      <body>
-         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover" />
-         <div className="error-content">
-            <h2 className="error">Error</h2>
-         </div>
-      </body>)
+      <div className="error-content">
+         <h2 className="error">Error</h2>
+      </div>
+   )
 }
 
 function timeout(ms: number) {
@@ -144,9 +137,12 @@ function randomContent(randomiser: MeetingRandomiser): Content {
 
 type UiState = Loading | Error | Content
 
-class Loading { }
+class Loading {
+   readonly type: "loading" = "loading"
+}
 
 class Error {
+   readonly type: "error" = "error"
    message: string
 
    constructor(
@@ -157,6 +153,7 @@ class Error {
 }
 
 class Content {
+   readonly type: "content" = "content"
    blocks: BuildingBlock[]
    name: string
    duration: string

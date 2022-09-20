@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { BuildingBlock } from "./building-block"
@@ -19,6 +19,7 @@ export default function EngineeringMeeting() {
    const [date, setDate] = useState<string>(initialMeeting.generatedDate)
 
    async function randomise() {
+      await timeout(3000) // TODO remove fake delay when real time-consuming action is added
       const meeting = randomiser.randomise()
       setName(meeting.name)
       setBlocks(meeting.blocks)
@@ -62,7 +63,7 @@ export default function EngineeringMeeting() {
             </div>
             <div className="meeting-structure">
                <h2 className="meeting-name">{name}</h2>
-               {[...blocks!].reverse().map((block) => (
+               {[...blocks].reverse().map((block) => (
                   <section key={block.id} className="block">
                      <img className="block-image" src={block.imagePath} alt={block.name} />
                      <div className="block-details">
@@ -86,4 +87,8 @@ export default function EngineeringMeeting() {
          </div>
       </SketchProvider.Provider>
    )
+}
+
+function timeout(ms: number) {
+   return new Promise(resolve => setTimeout(resolve, ms));
 }

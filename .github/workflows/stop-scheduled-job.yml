@@ -10,6 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     name: Stop the server
     steps:
-      # TODO do something useful
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: echo Stopping server (not doing anything yet)

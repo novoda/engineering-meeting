@@ -10,6 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     name: Start the server
     steps:
-      # TODO do something useful
-      - name: Run a one-line script
-        run: echo Hello, world!
+     - name: Run a one-line script
+        run: echo Starting server (not doing anything yet)

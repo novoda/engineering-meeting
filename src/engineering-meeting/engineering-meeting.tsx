@@ -8,6 +8,7 @@ import { ScreenshotTaker } from "./screenshot-taker"
 import EngineeringMeetingSketch from "./sketch/sketch"
 import SketchProvider from "./sketch/sketch-provider"
 import "./styles/engineering-meeting.css"
+import { FidgetSpinner } from 'react-loader-spinner'
 
 export default function EngineeringMeeting() {
    const randomiser = MeetingRandomiser.create()
@@ -102,7 +103,16 @@ function loading() {
       <body>
          <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover" />
          <div className="loading-content">
-            <h2 className="loading">Loading</h2>
+            <FidgetSpinner
+               visible={true}
+               height="80"
+               width="80"
+               ariaLabel="dna-loading"
+               wrapperStyle={{}}
+               wrapperClass="dna-wrapper"
+               ballColors={['#ACCF75', '#F6FA25', '#FAA426']}
+               backgroundColor="#1BA3DB"
+            />
          </div>
       </body>
    )
@@ -132,22 +142,21 @@ function randomContent(randomiser: MeetingRandomiser): Content {
    )
 }
 
-abstract class UiState { }
+type UiState = Loading | Error | Content
 
-class Loading extends UiState { }
+class Loading { }
 
-class Error extends UiState {
+class Error {
    message: string
 
    constructor(
       message: string,
    ) {
-      super()
       this.message = message
    }
 }
 
-class Content extends UiState {
+class Content {
    blocks: BuildingBlock[]
    name: string
    duration: string
@@ -159,7 +168,6 @@ class Content extends UiState {
       duration: string,
       date: string
    ) {
-      super()
       this.blocks = blocks
       this.name = name
       this.duration = duration

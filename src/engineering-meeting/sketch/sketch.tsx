@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { P5Instance, ReactP5Wrapper, Sketch, SketchProps } from "react-p5-wrapper"
-import { debounce } from "ts-debounce"
 import { BuildingBlock } from "../building-block"
 import SketchProvider from "./sketch-provider"
 import { StructureViewModel } from "./view-model"
@@ -25,12 +24,11 @@ const sketch: Sketch = (sketch: P5Instance) => {
    }
 
    sketch.updateWithProps = (props: SketchProps) => {
-      const canvasSize = props.canvasSize! as { width: number; height: number }
-      if (canvasSize.width !== sketch.width || canvasSize.height !== sketch.height || (props.data && props.data !== structure?.data)) {
+      if (512 !== sketch.width || 512 !== sketch.height || (props.data && props.data !== structure?.data)) {
          sketch.resizeCanvas(512, 512)
 
-         const data = props!.data as BuildingBlock[]
-         structure = StructureViewModel.from(data, sketch, canvasSize.height)
+         const data = props.data as BuildingBlock[]
+         structure = StructureViewModel.from(data, sketch, 512)
       }
    }
 }
@@ -43,14 +41,6 @@ export default function EngineeringMeetingSketch() {
       setTimeout(() => setCanvasSize({ width: 512, height: 512 }), 0)
       setStarted(true)
    }
-
-   React.useEffect(() => {
-      const debounced = debounce((width, height) => setCanvasSize({ width, height }), 200)
-      const handleResize = () => debounced(512, 512)
-      window.addEventListener("resize", handleResize)
-
-      return () => window.removeEventListener("resize", handleResize)
-   }, [])
 
    return (
       <SketchProvider.Consumer>

@@ -1,6 +1,6 @@
 {
   "name": "engineering-meeting",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "private": true,
   "author": "",
   "homepage": "https://novoda.github.io/engineering-meeting/",
@@ -13,6 +13,7 @@
     "p5": "^0.10.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-loader-spinner": "^5.3.4",
     "react-p5-wrapper": "^3.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",

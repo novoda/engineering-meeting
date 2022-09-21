@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import React, { useState } from "react"
+import { FidgetSpinner } from "react-loader-spinner"
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { BuildingBlock } from "./building-block"
@@ -11,20 +12,14 @@ import "./styles/engineering-meeting.css"
 
 export default function EngineeringMeeting() {
    const randomiser = MeetingRandomiser.create()
-   const initialMeeting = randomiser.randomise()
    const screenshotTaker = new ScreenshotTaker()
-   const [blocks, setBlocks] = useState<BuildingBlock[]>(initialMeeting.blocks)
-   const [name, setName] = useState<string>(initialMeeting.name)
-   const [duration, setDuration] = useState<string>(initialMeeting.duration)
-   const [date, setDate] = useState<string>(initialMeeting.generatedDate)
-   const [meetingUrl, setImage] = useState<string>()
+   const [uiState, setState] = useState<UiState>(new Initial())
+   const [meetingImage, setImage] = useState<string>("")
 
    async function randomise() {
-      const meeting = randomiser.randomise()
-      setName(meeting.name)
-      setBlocks(meeting.blocks)
-      setDuration(meeting.duration)
-      setDate(meeting.generatedDate)
+      setState(new Loading())
+      await timeout(1000) // TODO remove fake delay when real long-running action is added
+      setState(randomContent(randomiser))
    }
 
    async function fetchImage() {
@@ -55,38 +50,45 @@ export default function EngineeringMeeting() {
       )
    }
 
-   useEffect(() => {
-      fetchImage()
-   }, [name])
+   switch (uiState?.type) {
+      case "initial":
+         randomise()
+         return loading()
+      case "loading":
+         return loading()
+      case "content":
+         return content(meetingImage, uiState, structureToClipboard, randomise)
+      case "error":
+         return error()
+   }
+}
 
-   // 1. Manual fetch of the image that we want to display
-   // 2. We need to store the result of the fetch into a blob object
-   // 3. We need to pass the blob to the `src` property on the img tag
-   // Optional (for the future). Before trying to fetch the image using the dreams API, check if the dreams API is enabled (as a sort of feature flag) otherwise do nothing and operate as normal.
-
+function content(meetingImage: string, uiState: Content, copyToClipboard: () => Promise<void>, randomise: () => Promise<void>) {
    return (
-      <SketchProvider.Provider value={blocks}>
+      <SketchProvider.Provider value={uiState.blocks}>
          <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover" />
          <a href="https://github.com/novoda/engineering-meeting">
             <img className="logo" src={`${process.env.PUBLIC_URL}/images/novoda.png`} alt="Novoda" exclude-from-screenshot="yes" />
          </a>
          <div id="meeting" className="engineeringMeeting">
             <div className="sketch-view">
-               <div onClick={structureToClipboard}>
+               <div onClick={copyToClipboard}>
                   <img className="click" src={`${process.env.PUBLIC_URL}/images/click-here-to-copy.png`} alt="Copy" exclude-from-screenshot="yes" />
-                  <h2 className="meeting-name">{name}</h2>
+                  <h2 className="meeting-name">{uiState.name}</h2>
                   <div className="sketch-group">
-                     <img className="sketch-image" src={meetingUrl} width="512" height="512" alt={name} />
+                     <img className="sketch-image" src={meetingImage} width="512" height="512" alt={uiState.name} />
                      <EngineeringMeetingSketch />
                   </div>
                </div>
+
                <button className="randomiseButton" onClick={randomise} exclude-from-screenshot="yes">
                   <b>Randomise</b>
                </button>
                <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true} />
             </div>
             <div className="meeting-structure">
-               {[...blocks!].reverse().map((block) => (
+               <h2 className="meeting-name">{uiState.name}</h2>
+               {uiState.blocks.reverse().map((block) => (
                   <section key={block.id} className="block">
                      <img className="block-image" src={block.imagePath} alt={block.name} />
                      <div className="block-details">
@@ -104,13 +106,80 @@ export default function EngineeringMeeting() {
                   </section>
                ))}
                <p className="meeting-duration">
-                  <b>Estimated duration:</b> {duration}
+                  <b>Estimated duration:</b> {uiState.duration}
                </p>
                <p className="meeting-date">
-                  <b>Date:</b> {date}
+                  <b>Date:</b> {uiState.date}
                </p>
             </div>
          </div>
       </SketchProvider.Provider>
    )
+}
+
+function loading() {
+   return (
+      <div className="loading-content">
+         <FidgetSpinner
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="dna-wrapper"
+            ballColors={["#ACCF75", "#F6FA25", "#FAA426"]}
+            backgroundColor="#1BA3DB"
+         />
+      </div>
+   )
+}
+
+function error() {
+   return (
+      <div className="error-content">
+         <h2 className="error">Error</h2>
+      </div>
+   )
+}
+
+function timeout(ms: number) {
+   return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+function randomContent(randomiser: MeetingRandomiser): Content {
+   const meeting = randomiser.randomise()
+   return new Content(meeting.blocks, meeting.name, meeting.duration, meeting.generatedDate)
+}
+
+type UiState = Loading | Error | Content | Initial
+
+class Initial {
+   readonly type: "initial" = "initial"
+}
+class Loading {
+   readonly type: "loading" = "loading"
+}
+
+class Error {
+   readonly type: "error" = "error"
+   message: string
+
+   constructor(message: string) {
+      this.message = message
+   }
+}
+
+class Content {
+   readonly type: "content" = "content"
+   blocks: BuildingBlock[]
+   name: string
+   duration: string
+   date: string
+
+   constructor(blocks: BuildingBlock[], name: string, duration: string, date: string) {
+      this.blocks = blocks
+      this.name = name
+      this.duration = duration
+      this.date = date
+   }
 }

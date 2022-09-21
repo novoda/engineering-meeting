@@ -1,4 +1,8 @@
-import { allBlocks, BuildingBlock } from './building-block';
+import { fetchWithTimeout } from './extensions';
+import { allBlocks, BuildingBlock } from './models/building-block';
+import { Content } from './models/state';
+
+const characteristics = ['Beautiful', 'Detailed', 'Fully transparent Background', 'Trending on artstation', 'Realistic', 'Movie Poster']
 
 export class MeetingRandomiser {
    private blockRandomiser: BlockRandomiser
@@ -16,14 +20,26 @@ export class MeetingRandomiser {
       this.nameRandomiser = nameRandomiser
    }
 
-   randomise(): { name: string, blocks: BuildingBlock[], duration: string, generatedDate: string } {
+   async randomise(): Promise<Content> {
       const name = this.nameRandomiser.randomise()
       const blocks = this.blockRandomiser.randomise()
       const durationMin = blocks.reduce((acc, block) => acc + block.duration.minimum, 0)
       const durationMax = blocks.reduce((acc, block) => acc + block.duration.maximum, 0)
       const duration = `${durationMin} - ${durationMax} minutes`
       const generatedDate = getDateTime()
-      return { name, blocks, duration, generatedDate }
+      try {
+         const result_3 = await fetchWithTimeout(
+            `https://novoda-dreams.loca.lt/dreams?prompt="${name}.${characteristics.join('.')}"`,
+            {
+               headers: { "Bypass-Tunnel-Reminder": "" },
+            },
+            10_000
+         );
+         const blob = await result_3.blob();
+         return new Content(blocks, name, duration, generatedDate, URL.createObjectURL(blob));
+      } catch {
+         return new Content(blocks, name, duration, generatedDate);
+      }
    }
 }
 class BlockRandomiser {
@@ -95,7 +111,6 @@ class NameRandomiser {
       const noun = this.nouns[Math.floor(Math.random() * this.nouns.length)]
       const term = this.terms[Math.floor(Math.random() * this.terms.length)]
 
-      const names = ["The programming Frog", "The pinguin hacker", "The lazy pug", "The post apocalyptic cat"]
-      return names[Math.floor(Math.random() * names.length)]
+      return `The ${adjective} ${noun} ${term}`
    }
 }

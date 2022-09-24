@@ -31,7 +31,7 @@ export class MeetingRandomiser {
          const result_3 = await fetchWithTimeout(
             `https://novoda-dreams.loca.lt/dreams?prompt="${name}.${characteristics.join('.')}"`,
             {
-               headers: { "Bypass-Tunnel-Reminder": "" },
+               headers: { "Bypass-Tunnel-Reminder": "true" },
             },
             10_000
          );

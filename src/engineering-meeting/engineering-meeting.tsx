@@ -70,7 +70,7 @@ function preview(uiState: Content, copyToClipboard: () => Promise<void>, randomi
       <div className="meeting-preview">
          <div onClick={copyToClipboard}>
             <img className="click" src={`${process.env.PUBLIC_URL}/images/click-here-to-copy.png`} alt="Copy" exclude-from-screenshot="yes" />
-            <h2 className="meeting-name">{uiState.name}</h2>
+            <h1 className="meeting-name">{uiState.name}</h1>
             <div className="preview-images">
                {uiState.imageUrl ? (
                   <>
@@ -111,12 +111,12 @@ function details(uiState: Content) {
                </div>
             </section>
          ))}
-         <p className="meeting-duration">
-            <b>Estimated duration:</b> {uiState.duration}
-         </p>
-         <p className="meeting-date">
-            <b>Date:</b> {uiState.date}
-         </p>
+         <div className="meeting-metadata">
+            <p className="meeting-duration">
+               <b>Estimated duration:</b> {uiState.duration}
+            </p>
+            <p className="meeting-date">{uiState.date}</p>
+         </div>
       </div>
    )
 }

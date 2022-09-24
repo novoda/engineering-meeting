@@ -22,14 +22,14 @@
    -moz-osx-font-smoothing: grayscale;
    justify-content: center;
    display: flex;
-   background-color: white;
+   background-color: #f9f9f9;
 }
 
 .engineeringMeeting .meeting-preview {
    display: flex;
    flex-direction: column;
    align-self: center;
-   background-color: white;
+   background-color: #f9f9f9;
 }
 
 .engineeringMeeting .meeting-preview .preview-images {
@@ -47,6 +47,14 @@
    border-color: #030303;
    overflow: hidden;
    background-color: white;
+}
+
+.engineeringMeeting .meeting-preview .meeting-name {
+   position: relative;
+   padding-left: 1vmin;
+   text-align: center;
+   font-size: 3rem;
+   background-color: #f9f9f9;
 }
 
 .engineeringMeeting .meeting-preview .EngineeringMeetingSketch {
@@ -95,24 +103,20 @@
    align-self: center;
 }
 
-.engineeringMeeting .meeting-structure .meeting-name {
-   position: relative;
+.engineeringMeeting .meeting-structure .meeting-metadata {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+
+.engineeringMeeting .meeting-structure .meeting-metadata .meeting-duration {
    padding-left: 1vmin;
-   text-align: left;
    background-color: #f9f9f9;
 }
 
-.engineeringMeeting .meeting-structure .meeting-duration {
-   position: relative;
+.engineeringMeeting .meeting-structure .meeting-metadata .meeting-date {
    padding-left: 1vmin;
-   text-align: left;
-   background-color: #f9f9f9;
-}
-
-.engineeringMeeting .meeting-structure .meeting-date {
-   position: relative;
-   padding-left: 1vmin;
-   text-align: left;
+   font-size: small;
    background-color: #f9f9f9;
 }
 

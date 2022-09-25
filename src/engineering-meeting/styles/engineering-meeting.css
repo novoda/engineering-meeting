@@ -42,6 +42,13 @@
    background-color: #f9f9f9;
 }
 
+.engineeringMeeting .meeting-preview .meeting-name {
+   position: relative;
+   padding-left: 1vmin;
+   text-align: center;
+   background-color: #f9f9f9;
+}
+
 .engineeringMeeting .meeting-preview .preview-images {
    display: flex;
    flex-direction: row;
@@ -63,17 +70,7 @@
    margin: 0 auto;
 }
 
-.engineeringMeeting .meeting-preview .meeting-name {
-   position: relative;
-   padding-left: 1vmin;
-   text-align: center;
-   font-size: 3rem;
-   background-color: #f9f9f9;
-}
-
-.engineeringMeeting .meeting-preview .EngineeringMeetingSketch {
-   width: 40vmin;
-   height: 40vmin;
+.engineeringMeeting .meeting-preview .preview-images .EngineeringMeetingSketch {
    border-style: groove;
    border-left-width: 1px;
    border-top-width: 0px;
@@ -82,9 +79,7 @@
    border-color: #030303;
 }
 
-.engineeringMeeting .meeting-preview .meeting-image {
-   width: 40vmin;
-   height: 40vmin;
+.engineeringMeeting .meeting-preview .preview-images .meeting-image {
    border-style: groove;
    border-left-width: 0px;
    border-top-width: 0px;
@@ -100,6 +95,10 @@
    margin-top: 1vmin;
 }
 
+.engineeringMeeting .meeting-structure {
+   align-self: center;
+}
+
 .engineeringMeeting .meeting-structure .block {
    padding: 1vmin;
    margin: 1vmin;
@@ -111,27 +110,6 @@
    width: 98%;
    height: auto;
    background-color: #f3f3f3;
-}
-
-.engineeringMeeting .meeting-structure {
-   align-self: center;
-}
-
-.engineeringMeeting .meeting-structure .meeting-metadata {
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-}
-
-.engineeringMeeting .meeting-structure .meeting-metadata .meeting-duration {
-   padding-left: 1vmin;
-   background-color: #f9f9f9;
-}
-
-.engineeringMeeting .meeting-structure .meeting-metadata .meeting-date {
-   padding-left: 1vmin;
-   font-size: small;
-   background-color: #f9f9f9;
 }
 
 .engineeringMeeting .meeting-structure .block .block-image {
@@ -146,13 +124,27 @@
    margin-left: 2vmin;
 }
 
+.engineeringMeeting .meeting-structure .meeting-metadata {
+   display: flex;
+   flex-direction: column;
+}
+
+.engineeringMeeting .meeting-structure .meeting-metadata .meeting-duration {
+   padding-left: 1vmin;
+   background-color: #f9f9f9;
+}
+
+.engineeringMeeting .meeting-structure .meeting-metadata .meeting-date {
+   padding-left: 1vmin;
+   font-size: small;
+   background-color: #f9f9f9;
+}
+
 .loading-content {
    animation: fadeIn 1s;
 }
 
 .loading-content .loading-image {
-   height: 40vmin;
-   width: 40vmin;
    animation: glow linear 1s infinite;
 }
 
@@ -166,10 +158,6 @@
    100% {
       background-color: transparent;
    }
-}
-
-.loading-content .loading-text {
-   font-size: x-large;
 }
 
 .loading-content .loading-text:after {
@@ -201,8 +189,32 @@
       flex-direction: column;
    }
 
+   .engineeringMeeting .meeting-preview .meeting-name {
+      font-size: 3rem;
+   }
+
+   .engineeringMeeting .meeting-preview .preview-images .EngineeringMeetingSketch {
+      width: 27vmax;
+      height: 27vmax;
+   }
+
+   .engineeringMeeting .meeting-preview .preview-images .meeting-image {
+      width: 27vmax;
+      height: 27vmax;
+   }
+
    .engineeringMeeting .meeting-structure {
-      width: 60vw;
+      width: 80vw;
+      font-size: medium;
+   }
+
+   .loading-content .loading-image {
+      width: 27vmax;
+      height: 27vmax;
+   }
+
+   .loading-content .loading-text {
+      font-size: x-large;
    }
 }
 
@@ -211,10 +223,31 @@
       flex-direction: column;
    }
 
+   .engineeringMeeting .meeting-preview .meeting-name {
+      font-size: 2rem;
+   }
+
+   .engineeringMeeting .meeting-preview .preview-images .EngineeringMeetingSketch {
+      width: 40vmin;
+      height: 40vmin;
+   }
+
+   .engineeringMeeting .meeting-preview .preview-images .meeting-image {
+      width: 40vmin;
+      height: 40vmin;
+   }
+
    .engineeringMeeting .meeting-structure {
-      width: 100vw;
-      padding-left: 4vmin;
-      padding-right: 4vmin;
-      padding-bottom: 4vmin;
+      width: 98vw;
+      font-size: small;
+   }
+
+   .loading-content .loading-image {
+      width: 40vmin;
+      height: 40vmin;
+   }
+
+   .loading-content .loading-text {
+      font-size: medium;
    }
 }

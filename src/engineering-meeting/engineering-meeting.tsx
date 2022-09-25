@@ -1,10 +1,9 @@
-import React, { useState } from "react"
-import { FidgetSpinner } from "react-loader-spinner"
+import { useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import { UiState, Initial, Loading, Content } from "./models/state"
 import {} from "./extensions"
 import { MeetingRandomiser } from "./meeting-randomiser"
+import { Content, Initial, Loading, UiState } from "./models/state"
 import { ScreenshotTaker } from "./screenshot-taker"
 import EngineeringMeetingSketch from "./sketch/sketch"
 import SketchProvider from "./sketch/sketch-provider"
@@ -124,16 +123,8 @@ function details(uiState: Content) {
 function loading() {
    return (
       <div className="loading-content">
-         <FidgetSpinner
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="dna-loading"
-            wrapperStyle={{}}
-            wrapperClass="dna-wrapper"
-            ballColors={["#ACCF75", "#F6FA25", "#FAA426"]}
-            backgroundColor="#1BA3DB"
-         />
+         <img className="loading-image" src={`${process.env.PUBLIC_URL}/images/bot-thinking.png`} alt="Loading" />
+         <p className="loading-text">Roberto the bot is dreaming your next meeting</p>
       </div>
    )
 }

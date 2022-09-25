@@ -1,4 +1,4 @@
-import { fetchWithTimeout } from './extensions';
+import { delay, fetchWithTimeout } from './extensions';
 import { allBlocks, BuildingBlock } from './models/building-block';
 import { Content } from './models/state';
 
@@ -28,16 +28,17 @@ export class MeetingRandomiser {
       const duration = `${durationMin} - ${durationMax} minutes`
       const generatedDate = getDateTime()
       try {
-         const result_3 = await fetchWithTimeout(
+         const result = await fetchWithTimeout(
             `https://novoda-dreams.loca.lt/dreams?prompt="${name}.${characteristics.join('.')}"`,
             {
                headers: { "Bypass-Tunnel-Reminder": "true" },
             },
             10_000
          );
-         const blob = await result_3.blob();
+         const blob = await result.blob();
          return new Content(blocks, name, duration, generatedDate, URL.createObjectURL(blob));
       } catch {
+         await delay(2000)
          return new Content(blocks, name, duration, generatedDate);
       }
    }
@@ -83,7 +84,7 @@ class NameRandomiser {
       'Fish Guts', 'Bakersfield', 'Orange Juice', 'Scavenger', 'Colonization', 'Probabilistic', 'Gyroscopic', 'Cognition', 'Collaboration', 'Geology', 'Conjugate', 'Paradise', 'Comic Book',
       'Comic Book Store', 'Public Restroom', 'Onion', 'Boyfriend', 'Girlfriend', 'Happy Marriage', 'Roommate', 'Hello', 'Bacon', 'Pork Chop', 'Nerdvana', 'Planetary', 'Aquatic', 'Dumpster Dumpling',
       'Dumpling', 'Take Out', 'Badger', 'Cali', 'Awkward Angle', 'Baby', 'Smarties', 'Junk Food', 'French Fry', 'Animalcule', 'Molecule', 'Cornfield', 'Train', 'Train Collector\'s', 'Pyramidal Train',
-      'Christmas Tree', 'One Jiao', 'Self-Roast', 'Submarine', 'Navy Dolphin', 'Coiling Snake', 'Broken Record', 'Constellation', 'Star', 'Terminator', 'Procrastination', 'Dancing',
+      'Christmas Tree', 'Self-Roast', 'Submarine', 'Navy Dolphin', 'Coiling Snake', 'Broken Record', 'Constellation', 'Star', 'Terminator', 'Procrastination', 'Dancing',
       'Driving', 'Periodic', 'Newspaper', 'Jerusalem', 'Buddha', 'Complicated', 'Simplistic', 'Watermelon', 'Piñata', 'Party Pooper', 'Chess', '3D Chess', '4D Chess', 'Avocado', 'Pizza Man',
       'Pizza Woman', 'Pizza', 'Banana', 'Yellow Minion', 'Despicable Minion', '4th Grade', '5th Grade', '13th Grade', 'Undergraduate', 'Cabbage, Kale, Lettuce', 'Something', 'Dark Matter', 'World War 0',
       'Anti-Matter', 'Electron', 'Proton', 'Muon', 'Ion', 'Isotope', 'Radioactivity', 'Toothpaste', 'Grasshopper', 'Ladybug', 'Mosquito', 'Quesadilla', 'Taco', 'Burrito', 'Bread Crumb', 'Pancake Stack', 'Whip Cream',

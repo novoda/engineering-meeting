@@ -23,6 +23,16 @@
    justify-content: center;
    display: flex;
    background-color: #f9f9f9;
+   animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+   0% {
+      opacity: 0;
+   }
+   100% {
+      opacity: 1;
+   }
 }
 
 .engineeringMeeting .meeting-preview {
@@ -35,8 +45,9 @@
 .engineeringMeeting .meeting-preview .preview-images {
    display: flex;
    flex-direction: row;
-   align-self: center;
    vertical-align: middle;
+   width: fit-content;
+   height: fit-content;
    box-shadow: 7px 7px 7px #00000077;
    border-style: groove;
    border-left-width: 1px;
@@ -47,6 +58,7 @@
    border-color: #030303;
    overflow: hidden;
    background-color: white;
+   margin: 0 auto;
 }
 
 .engineeringMeeting .meeting-preview .meeting-name {
@@ -130,6 +142,61 @@
    padding-left: 2vmin;
    align-self: flex-start;
    margin-left: 2vmin;
+}
+
+.loading-content {
+   animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+   0% {
+      opacity: 0;
+   }
+   100% {
+      opacity: 1;
+   }
+}
+
+.loading-content .loading-image {
+   height: 512px;
+   width: 512px;
+}
+
+.loading-content .loading-text {
+   font-size: x-large;
+}
+
+.loading-content .loading-text:after {
+   content: " ...";
+   animation: dots 1s steps(5, end) infinite;
+}
+
+@keyframes fadeIn {
+   0% {
+      opacity: 0;
+   }
+   100% {
+      opacity: 1;
+   }
+}
+
+@keyframes dots {
+   0%,
+   20% {
+      color: rgba(0, 0, 0, 0);
+      text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+   }
+   40% {
+      color: white;
+      text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+   }
+   60% {
+      text-shadow: 0.25em 0 0 white, 0.5em 0 0 rgba(0, 0, 0, 0);
+   }
+   80%,
+   100% {
+      text-shadow: 0.25em 0 0 white, 0.5em 0 0 white;
+   }
 }
 
 @media (orientation: landscape) {

@@ -61,3 +61,7 @@ export async function fetchWithTimeout(resource: string, options = {}, timeout =
     clearTimeout(id)
     return response
 }
+
+export async function delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

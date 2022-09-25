@@ -2,7 +2,7 @@ import { delay, fetchWithTimeout } from './extensions';
 import { allBlocks, BuildingBlock } from './models/building-block';
 import { Content } from './models/state';
 
-const characteristics = ['Beautiful', 'Detailed', 'Fully transparent Background', 'Trending on artstation', 'Realistic', 'Movie Poster']
+const characteristics = ['Movie Poster', 'Beautiful', 'Detailed', 'Trending on artstation', 'Realistic']
 
 export class MeetingRandomiser {
    private blockRandomiser: BlockRandomiser

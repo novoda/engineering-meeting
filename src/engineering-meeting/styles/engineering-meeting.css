@@ -57,6 +57,8 @@
    border-radius: 30px;
    border-color: #030303;
    overflow: hidden;
+   -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC); /* this fixes the overflow:hidden in Chrome/Opera */
+   mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC); /* this fixes the overflow:hidden in Chrome/Opera */
    background-color: white;
    margin: 0 auto;
 }
@@ -70,8 +72,8 @@
 }
 
 .engineeringMeeting .meeting-preview .EngineeringMeetingSketch {
-   width: 512px;
-   height: 512px;
+   width: 40vmin;
+   height: 40vmin;
    border-style: groove;
    border-left-width: 1px;
    border-top-width: 0px;
@@ -81,8 +83,8 @@
 }
 
 .engineeringMeeting .meeting-preview .meeting-image {
-   width: 512px;
-   height: 512px;
+   width: 40vmin;
+   height: 40vmin;
    border-style: groove;
    border-left-width: 0px;
    border-top-width: 0px;
@@ -148,18 +150,9 @@
    animation: fadeIn 1s;
 }
 
-@keyframes fadeIn {
-   0% {
-      opacity: 0;
-   }
-   100% {
-      opacity: 1;
-   }
-}
-
 .loading-content .loading-image {
-   height: 512px;
-   width: 512px;
+   height: 40vmin;
+   width: 40vmin;
    animation: glow linear 1s infinite;
 }
 
@@ -182,15 +175,6 @@
 .loading-content .loading-text:after {
    content: " ...";
    animation: dots 1s steps(5, end) infinite;
-}
-
-@keyframes fadeIn {
-   0% {
-      opacity: 0;
-   }
-   100% {
-      opacity: 1;
-   }
 }
 
 @keyframes dots {

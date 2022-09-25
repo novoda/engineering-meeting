@@ -53,10 +53,10 @@ function content(uiState: Content, copyToClipboard: () => Promise<void>, randomi
    return (
       <SketchProvider.Provider value={uiState.blocks}>
          <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover" />
-         <a href="https://github.com/novoda/engineering-meeting">
-            <img className="logo" src={`${process.env.PUBLIC_URL}/images/novoda.png`} alt="Novoda" exclude-from-screenshot="yes" />
-         </a>
          <div id="meeting" className="engineeringMeeting">
+            <a href="https://github.com/novoda/engineering-meeting">
+               <img className="logo" src={`${process.env.PUBLIC_URL}/images/novoda.png`} alt="Novoda" exclude-from-screenshot="yes" />
+            </a>
             {preview(uiState, copyToClipboard, randomise)}
             {details(uiState)}
          </div>

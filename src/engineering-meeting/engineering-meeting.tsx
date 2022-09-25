@@ -124,7 +124,7 @@ function loading() {
    return (
       <div className="loading-content">
          <img className="loading-image" src={`${process.env.PUBLIC_URL}/images/bot-thinking.png`} alt="Loading" />
-         <p className="loading-text">Roberto the bot is dreaming your next meeting</p>
+         <p className="loading-text">Roberto, the bot, is dreaming your next meeting</p>
       </div>
    )
 }

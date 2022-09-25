@@ -15,7 +15,6 @@ const sketch: Sketch = (sketch: P5Instance) => {
 
    sketch.draw = () => {
       sketch.clear(0, 0, 0, 0)
-      sketch.background("#ffffff")
       structure?.blocks.reduce((accumulator, block) => {
          const x = sketch.width / 2 - block.width / 2
          const y = accumulator - block.height * 0.6 - block.height / 2

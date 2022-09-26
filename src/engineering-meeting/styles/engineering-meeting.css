@@ -23,16 +23,6 @@
    justify-content: center;
    display: flex;
    background-color: #f9f9f9;
-   animation: fadeIn 1s;
-}
-
-@keyframes fadeIn {
-   0% {
-      opacity: 0;
-   }
-   100% {
-      opacity: 1;
-   }
 }
 
 .engineeringMeeting .meeting-preview {
@@ -141,10 +131,6 @@
    background-color: #f9f9f9;
 }
 
-.loading-content {
-   animation: fadeIn 1s;
-}
-
 .loading-content .loading-image {
    animation: glow linear 1s infinite;
 }
@@ -169,15 +155,15 @@
 @keyframes dots {
    0%,
    20% {
-      color: rgba(0, 0, 0, 0);
-      text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+      color: transparent;
+      text-shadow: 0.25em 0 0 transparent, 0.5em 0 0 transparent;
    }
    40% {
       color: white;
-      text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+      text-shadow: 0.25em 0 0 transparent, 0.5em 0 0 transparent;
    }
    60% {
-      text-shadow: 0.25em 0 0 white, 0.5em 0 0 rgba(0, 0, 0, 0);
+      text-shadow: 0.25em 0 0 white, 0.5em 0 0 transparent;
    }
    80%,
    100% {

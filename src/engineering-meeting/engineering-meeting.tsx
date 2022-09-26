@@ -1,4 +1,5 @@
 import { useState } from "react"
+import FadeIn from "react-fade-in"
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import {} from "./extensions"
@@ -7,6 +8,7 @@ import { Content, Initial, Loading, UiState } from "./models/state"
 import { ScreenshotTaker } from "./screenshot-taker"
 import EngineeringMeetingSketch from "./sketch/sketch"
 import SketchProvider from "./sketch/sketch-provider"
+
 import "./styles/engineering-meeting.css"
 
 export default function EngineeringMeeting() {
@@ -53,13 +55,15 @@ function content(uiState: Content, copyToClipboard: () => Promise<void>, randomi
    return (
       <SketchProvider.Provider value={uiState.blocks}>
          <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover" />
-         <div id="meeting" className="engineeringMeeting">
-            <a href="https://github.com/novoda/engineering-meeting">
-               <img className="logo" src={`${process.env.PUBLIC_URL}/images/novoda.png`} alt="Novoda" exclude-from-screenshot="yes" />
-            </a>
-            {preview(uiState, copyToClipboard, randomise)}
-            {details(uiState)}
-         </div>
+         <FadeIn>
+            <div id="meeting" className="engineeringMeeting">
+               <a href="https://github.com/novoda/engineering-meeting">
+                  <img className="logo" src={`${process.env.PUBLIC_URL}/images/novoda.png`} alt="Novoda" exclude-from-screenshot="yes" />
+               </a>
+               {preview(uiState, copyToClipboard, randomise)}
+               {details(uiState)}
+            </div>
+         </FadeIn>
       </SketchProvider.Provider>
    )
 }
@@ -92,7 +96,7 @@ function preview(uiState: Content, copyToClipboard: () => Promise<void>, randomi
 
 function details(uiState: Content) {
    return (
-      <div className="meeting-structure">
+      <FadeIn className="meeting-structure">
          {uiState.blocks.map((block) => (
             <section key={block.id} className="block">
                <img className="block-image" src={block.imagePath} alt={block.name} />
@@ -116,16 +120,18 @@ function details(uiState: Content) {
             </p>
             <p className="meeting-date">{uiState.date}</p>
          </div>
-      </div>
+      </FadeIn>
    )
 }
 
 function loading() {
    return (
-      <div className="loading-content">
-         <img className="loading-image" src={`${process.env.PUBLIC_URL}/images/bot-thinking.png`} alt="Loading" />
-         <p className="loading-text">Roberto, the bot, is dreaming your next meeting</p>
-      </div>
+      <FadeIn>
+         <div className="loading-content">
+            <img className="loading-image" src={`${process.env.PUBLIC_URL}/images/bot-thinking.png`} alt="Loading" />
+            <p className="loading-text">Roberto, the bot, is dreaming your next meeting</p>
+         </div>
+      </FadeIn>
    )
 }
 

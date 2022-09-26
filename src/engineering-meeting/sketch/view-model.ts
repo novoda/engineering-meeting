@@ -1,5 +1,5 @@
 import p5, { Image } from "p5";
-import { BuildingBlock } from '../building-block';
+import { BuildingBlock } from '../models/building-block';
 
 export class StructureViewModel {
     readonly blocks: BlockViewModel[] = [];
@@ -13,6 +13,10 @@ export class StructureViewModel {
     constructor(blocks: BlockViewModel[], data: BuildingBlock[]) {
         this.blocks = blocks;
         this.data = data;
+    }
+
+    get height() {
+        return this.blocks.reduce((acc, block) => acc + block.height * 0.6, 0)
     }
 }
 

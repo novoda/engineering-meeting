@@ -1,5 +1,5 @@
 import React from "react";
-import { BuildingBlock } from '../building-block';
+import { BuildingBlock } from '../models/building-block';
 
 const SketchProvider = React.createContext([] as BuildingBlock[]);
 

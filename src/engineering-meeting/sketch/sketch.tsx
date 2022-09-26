@@ -2,7 +2,7 @@ import $ from "jquery"
 import React, { useState } from "react"
 import { P5Instance, ReactP5Wrapper, Sketch, SketchProps } from "react-p5-wrapper"
 import { debounce } from "ts-debounce"
-import { BuildingBlock } from "../building-block"
+import { BuildingBlock } from "../models/building-block"
 import SketchProvider from "./sketch-provider"
 import { StructureViewModel } from "./view-model"
 
@@ -22,7 +22,7 @@ const sketch: Sketch = (sketch: P5Instance) => {
          sketch.image(block.image, x, y, block.width, block.height)
 
          return y + block.height / 2
-      }, sketch.height)
+      }, sketch.height - (sketch.height - structure.height) / 4)
    }
 
    sketch.updateWithProps = (props: SketchProps) => {
@@ -31,7 +31,7 @@ const sketch: Sketch = (sketch: P5Instance) => {
          sketch.resizeCanvas(canvasSize.width, canvasSize.height)
 
          const data = props.data as BuildingBlock[]
-         structure = StructureViewModel.from(data, sketch, canvasSize.height)
+         structure = StructureViewModel.from([...data].reverse(), sketch, canvasSize.height)
       }
    }
 }

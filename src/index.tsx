@@ -1,5 +1,4 @@
 import ReactDOM from "react-dom"
-import React from "react"
 import { HashRouter, Route, Routes } from "react-router-dom"
 import EngineeringMeeting from "./engineering-meeting/engineering-meeting"
 import Landing from "./landing"

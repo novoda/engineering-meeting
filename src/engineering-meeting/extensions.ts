@@ -36,15 +36,32 @@ HTMLCanvasElement.prototype.toClipboard = function (this: HTMLCanvasElement, { o
 
     const { clipboard } = navigator
     if (clipboard) {
-        try { 
+        try {
             clipboard.write([new ClipboardItem({ "image/png": data() })])
-            .then(() => onSuccess())
-            .catch(() => onFailure());
+                .then(() => onSuccess())
+                .catch(() => onFailure());
         } catch {
             onFailure();
         }
-        
+
     } else {
         onFailure();
     }
+}
+
+export async function fetchWithTimeout(resource: string, options = {}, timeout = 5000) {
+    const abortController = new AbortController()
+    const id = setTimeout(() => {
+        abortController.abort()
+    }, timeout)
+    const response = await fetch(resource, {
+        ...options,
+        signal: abortController.signal,
+    })
+    clearTimeout(id)
+    return response
+}
+
+export async function delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }

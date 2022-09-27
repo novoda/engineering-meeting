@@ -35,6 +35,8 @@
 .engineeringMeeting .meeting-preview .meeting-name {
    position: relative;
    padding-left: 1vmin;
+   margin-block-start: 0.3em;
+   margin-block-end: 0.3em;
    text-align: center;
    background-color: #f9f9f9;
 }
@@ -133,7 +135,6 @@
 
 .loading-content .loading-image {
    animation: glow linear 1s infinite;
-   animation-delay: 1s;
 }
 
 @keyframes glow {
@@ -178,17 +179,21 @@
    }
 
    .engineeringMeeting .meeting-preview .meeting-name {
-      font-size: 3rem;
+      font-size: 2.5rem;
    }
 
    .engineeringMeeting .meeting-preview .preview-images .EngineeringMeetingSketch {
       width: 27vmax;
       height: 27vmax;
+      max-width: 50vh;
+      max-height: 50vh;
    }
 
    .engineeringMeeting .meeting-preview .preview-images .meeting-image {
       width: 27vmax;
       height: 27vmax;
+      max-width: 50vh;
+      max-height: 50vh;
    }
 
    .engineeringMeeting .meeting-structure {
@@ -199,6 +204,8 @@
    .loading-content .loading-image {
       width: 27vmax;
       height: 27vmax;
+      max-width: 50vh;
+      max-height: 50vh;
    }
 
    .loading-content .loading-text {

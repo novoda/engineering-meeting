@@ -4,6 +4,7 @@ export default function Landing() {
    return (
       <body>
          <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover" />
+         <link rel="preload" href={`${process.env.PUBLIC_URL}/images/bot-thinking.png`} as="image" type="image/png" />
          <a href="https://github.com/novoda/engineering-meeting">
             <img className="logo" src={`${process.env.PUBLIC_URL}/images/novoda.png`} alt="Novoda" />
          </a>

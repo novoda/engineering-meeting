@@ -135,6 +135,7 @@
 
 .loading-content .loading-image {
    animation: glow linear 1s infinite;
+   animation-delay: 0.75s;
 }
 
 @keyframes glow {

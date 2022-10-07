@@ -86,7 +86,7 @@ class NameRandomiser {
       'Dumpling', 'Take Out', 'Badger', 'Cali', 'Awkward Angle', 'Smarties', 'Junk Food', 'French Fry', 'Animalcule', 'Cornfield', 'Train', 'Train Collector\'s', 'Pyramidal Train',
       'Christmas Tree', 'Self-Roast', 'Submarine', 'Navy Dolphin', 'Coiling Snake', 'Broken Record', 'Constellation', 'Star', 'Procrastination', 'Dancing',
       'Driving', 'Periodic', 'Newspaper', 'Jerusalem', 'Buddha', 'Complicated', 'Simplistic', 'Watermelon', 'Piñata', 'Party Pooper', 'Chess', '3D Chess', '4D Chess', 'Avocado', 'Pizza Man',
-      'Pizza Woman', 'Pizza', 'Banana', 'Yellow Minion', 'Despicable Minion', 'Cabbage, Kale, Lettuce', 'Something', 'Dark Matter',
+      'Pizza Woman', 'Pizza', 'Banana', 'Yellow Minion', 'Despicable Minion', 'Cabbage', 'Kale', 'Lettuce', 'Something', 'Dark Matter',
       'Anti-Matter', 'Toothpaste', 'Grasshopper', 'Ladybug', 'Mosquito', 'Quesadilla', 'Taco', 'Burrito', 'Bread Crumb', 'Pancake Stack', 'Whip Cream',
       'Christmas', 'Romance', 'Midnight', 'Monopolar', 'Troll', 'Hamburger', 'Spaghetti', 'Chicken Noodle Soup', 'Plankton', 'Ironic Ionic', 'Venus', 'Mars',
       'Date Night', 'Cooking Night', 'Game Night', 'Friendship', 'Status Quo', 'Bono', 'Raider\'s', 'Lewis\'s', 'Gru\'s', 'Moquito\'s', 'Persian Cat', 'Cat', 'Dog', 'Pug', 'Whale', 'Orange',

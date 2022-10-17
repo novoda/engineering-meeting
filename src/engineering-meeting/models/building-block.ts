@@ -74,13 +74,13 @@ export const allBlocks = [
     ),
     new BuildingBlock(
         {
-            id: undefined,
-            name: "???",
-            description: "???",
-            purpose: "???",
+            id: 5,
+            name: "Tech and the World",
+            description: "A roundtable discussion or presentation on some aspect of how the tech industry affects the world. Might be an ethical issue, or maybe just a presentation on an interesting new application of tech in the world.",
+            purpose: "A greater awareness of how technology affects the contemporary world (for good or ill).",
             duration: new Duration({ minimum: 20, maximum: 30 }),
-            imagePath: `${IMAGE_PATH}image5.png`,
-            isRequired: false,
+            imagePath: `${IMAGE_PATH}/block5.png`,
+            isRequired: true,
         },
     ),
     new BuildingBlock(

@@ -80,7 +80,7 @@ export const allBlocks = [
             purpose: "A greater awareness of how technology affects the contemporary world (for good or ill).",
             duration: new Duration({ minimum: 20, maximum: 30 }),
             imagePath: `${IMAGE_PATH}/block5.png`,
-            isRequired: true,
+            isRequired: false,
         },
     ),
     new BuildingBlock(

@@ -189,11 +189,6 @@ class NameRandomiser {
    }
 
    coinFlip() : boolean {
-      const coin = Math.round(Math.random())
-      if (coin == 0) {
-         return true
-      } else {
-         return false
-      }
+      return Math.random() > 0.5
    }
 }

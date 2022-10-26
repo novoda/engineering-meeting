@@ -189,7 +189,7 @@ class NameRandomiser {
    }
 
    coinFlip() : boolean {
-      const coin = Math.round(Math.random()) + 1
+      const coin = Math.round(Math.random())
       if (coin == 0) {
          return true
       } else {

@@ -2,8 +2,6 @@ import { delay, fetchWithTimeout } from './extensions';
 import { allBlocks, BuildingBlock } from './models/building-block';
 import { Content } from './models/state';
 
-const characteristics = ['Movie Poster', 'Beautiful', 'Detailed', 'Trending on artstation', 'Realistic', 'Art by artgem', 'Award winning']
-
 export class MeetingRandomiser {
    private blockRandomiser: BlockRandomiser
    private nameRandomiser: NameRandomiser
@@ -21,7 +19,7 @@ export class MeetingRandomiser {
    }
 
    async randomise(): Promise<Content> {
-      const name = this.nameRandomiser.randomise()
+      const name = this.nameRandomiser.generateTitle()
       const blocks = this.blockRandomiser.randomise()
       const durationMin = blocks.reduce((acc, block) => acc + block.duration.minimum, 0)
       const durationMax = blocks.reduce((acc, block) => acc + block.duration.maximum, 0)
@@ -29,7 +27,7 @@ export class MeetingRandomiser {
       const generatedDate = getDateTime()
       try {
          const result = await fetchWithTimeout(
-            `https://novoda-dreams.loca.lt/dreams?prompt="${name}.${characteristics.join('.')}"`,
+            `https://novoda-dreams.loca.lt/dreams?prompt="${name}}"`,
             {
                headers: { "Bypass-Tunnel-Reminder": "true" },
             },
@@ -80,6 +78,23 @@ function getDateTime(): string {
 }
 
 class NameRandomiser {
+
+   private genre = ['Fantasy','Futuristic','Sci-fi','Dystopian','Horror','Western','Romance','Mystery','Animation','Crime','Adventure']
+   private century = ['16th century','17th century','18th century','19th century','20th century','21st century','22nd century']
+   private era = ['1960s', '1970s', '1980s', '1990s', '2000s', '2010s', '2020s']
+
+   private contentType = ['Poster','Painting','Digital art']
+
+   private posterType = ['Movie Poster', 'Comic book front cover', 'Book front cover']
+   private posterInspo = ['Game of Thrones','Star Wars','Star Trek','Lord of the Rings','The Simpsons','South Park','Family Guy','Futurama','American Dad','Rick and Morty','The Avengers']
+
+   private paintingStyle = ['Surrealism','Cubism','Abstract','Minimalism','Renaissance','Hyperrealism','Iridescent']
+   private paintingMethod = ['Oil','Watercolour','Acrylic','Digital','Graffiti']
+   private paintingArtist = ['Banksy','John Berkey','Sandro Botticelli','Pablo Picasso','Vincent Van Gogh']
+
+   private digitalStyle = ['Pop','Pixel','ASCII','Geometric','Low poly','Collage','Synthwave','Cyberpunk','Steampunk','Dystopia','Infinity','Isometric','Algorithmic']
+   private digitalArtist = ['Syd Mead','Dan Mumford','Jacek Yerka','Stephan Martiniere','Simon Stalenhag']
+
    private nouns = ['Egg Salad', 'Ham Sandwich', 'Chicken McNugget', 'Club Turkey', 'Yellow Hat', 'Isolation', 'Wiggly Finger', 'Chi-Squared', 'Unicorn', 'Holographic', 'Extract',
       'Fish Guts', 'Bakersfield', 'Orange Juice', 'Scavenger', 'Colonization', 'Probabilistic', 'Gyroscopic', 'Cognition', 'Collaboration', 'Conjugate', 'Paradise', 'Comic Book',
       'Comic Book Store', 'Public Restroom', 'Onion', 'Boyfriend', 'Girlfriend', 'Happy Marriage', 'Roommate', 'Bacon', 'Pork Chop', 'Nerdvana', 'Planetary', 'Aquatic', 'Dumpster Dumpling',
@@ -107,11 +122,78 @@ class NameRandomiser {
    private adjectives = ['Aquatic', 'Romantic', 'Funny', 'Futuristic', 'Big', 'Tiny', 'Small', 'Dummy', 'Fantastic', 'Complicated', 'Extraordinary', 'Toxic', 'Magnificient', 'Fantabulous', 'Weird', 'Expensive',
       'Perfect', 'Calm', 'Senseless', 'Paranormal', 'Incredible', 'Accurate', 'Ancient', 'New', 'Bright', 'Colorful', 'Cute', 'Deep', 'Dark', 'Elegant', 'Fancy', 'Huge', 'Impossible', 'Important']
 
-   randomise(): string {
+   generateTitle(): string {
       const adjective = Math.random() > 0.5 ? this.adjectives[Math.floor(Math.random() * this.adjectives.length)] : ''
-      const noun = this.nouns[Math.floor(Math.random() * this.nouns.length)]
-      const term = this.terms[Math.floor(Math.random() * this.terms.length)]
+      const noun = this.random(this.nouns)
+      const term = this.random(this.terms)
+      const title = `The ${adjective} ${noun} ${term}`
+      return this.generateMediaType(title)
+   }
 
-      return `The ${adjective} ${noun} ${term}`
+   generateMediaType(nameTitle: string): string {
+      const genre = this.random(this.genre)
+      const type = this.random(this.contentType)
+      const timePeriod = this.generateTimePeriod()
+      let flavour = ""
+      switch(type) {
+         case "Poster": {
+            flavour = this.generatePoster()
+            break;
+         }
+         case "Painting": {
+            flavour = this.generatePainting()
+            break;
+         }
+         case "Digital art": {
+            flavour = this.generateDigitalArt()
+            break;
+         }
+      }
+         
+      return nameTitle + ", " + timePeriod + ", " + genre + ", " + flavour
+   }
+
+   generatePoster(): string {
+      const posterType = this.random(this.posterType)
+      const posterInspo = this.random(this.posterInspo)
+
+      return `${posterType} inspired by ${posterInspo}`
+   }
+
+   generatePainting(): string {
+      const style = this.random(this.paintingStyle)
+      const method = this.random(this.paintingMethod)
+      const artist = this.random(this.paintingArtist)
+
+      return `${style} ${method} painting by ${artist}`
+   }
+
+   generateDigitalArt(): string {
+      const style = this.random(this.digitalStyle)
+      const artist = this.random(this.digitalArtist)
+
+      return `${style} digital illustration by ${artist}`
+   }
+
+   generateTimePeriod(): string {
+      const isEra = this.coinFlip()
+      if (isEra) {
+         return this.random(this.era)
+      } else {
+         return this.random(this.century)
+      }
+   }
+
+   random(array: string[]): string {
+      return array[Math.floor(Math.random() * array.length)]
+   }
+
+   coinFlip() : boolean {
+      const coin = Math.round(Math.random()) + 1
+      if (coin == 0) {
+         return true
+      } else {
+         return false
+      }
    }
 }

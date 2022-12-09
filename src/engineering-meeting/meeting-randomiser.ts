@@ -204,9 +204,4 @@ class NameRandomiser {
    randomIndex(list: object): number {
       return Math.floor(Math.random() * Object.keys(list).length / 2)
    }
-
-   random2(list: object[]): object {
-      const randomIndex = this.randomIndex(list)
-      return list[randomIndex]
-   }
 }

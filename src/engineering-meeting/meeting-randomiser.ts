@@ -1,3 +1,4 @@
+import { toToastItem } from 'react-toastify/dist/utils';
 import { delay, fetchWithTimeout } from './extensions';
 import { allBlocks, BuildingBlock } from './models/building-block';
 import { Content } from './models/state';
@@ -19,7 +20,7 @@ export class MeetingRandomiser {
    }
 
    async randomise(): Promise<Content> {
-      const name = this.nameRandomiser.generateTitle()
+      const title = this.nameRandomiser.createTitle()
       const blocks = this.blockRandomiser.randomise()
       const durationMin = blocks.reduce((acc, block) => acc + block.duration.minimum, 0)
       const durationMax = blocks.reduce((acc, block) => acc + block.duration.maximum, 0)
@@ -27,17 +28,18 @@ export class MeetingRandomiser {
       const generatedDate = getDateTime()
       try {
          const result = await fetchWithTimeout(
-            `https://novoda-dreams.loca.lt/dreams?prompt="${name}}"`,
+               `https://novoda-dreams.loca.lt/dreams?prompt="${this.nameRandomiser.generatePrompt(title)}}"`,
+
             {
                headers: { "Bypass-Tunnel-Reminder": "true" },
             },
             10_000
          );
          const blob = await result.blob();
-         return new Content(blocks, name, duration, generatedDate, URL.createObjectURL(blob));
+         return new Content(blocks, title, duration, generatedDate, URL.createObjectURL(blob));
       } catch {
          await delay(2000)
-         return new Content(blocks, name, duration, generatedDate);
+         return new Content(blocks, title, duration, generatedDate);
       }
    }
 }
@@ -77,13 +79,22 @@ function getDateTime(): string {
    return date.toLocaleString()
 }
 
+enum TimePeriod {
+   Era,
+   Century,
+}
+
+enum ContentType {
+   Poster,
+   Painting,
+   DigitalArt,
+} 
+
 class NameRandomiser {
 
    private genre = ['Fantasy','Futuristic','Sci-fi','Dystopian','Horror','Western','Romance','Mystery','Animation','Crime','Adventure']
    private century = ['16th century','17th century','18th century','19th century','20th century','21st century','22nd century']
    private era = ['1960s', '1970s', '1980s', '1990s', '2000s', '2010s', '2020s']
-
-   private contentType = ['Poster','Painting','Digital art']
 
    private posterType = ['Movie Poster', 'Comic book front cover', 'Book front cover']
    private posterInspo = ['Game of Thrones','Star Wars','Star Trek','Lord of the Rings','The Simpsons','South Park','Family Guy','Futurama','American Dad','Rick and Morty','The Avengers']
@@ -122,45 +133,41 @@ class NameRandomiser {
    private adjectives = ['Aquatic', 'Romantic', 'Funny', 'Futuristic', 'Big', 'Tiny', 'Small', 'Dummy', 'Fantastic', 'Complicated', 'Extraordinary', 'Toxic', 'Magnificient', 'Fantabulous', 'Weird', 'Expensive',
       'Perfect', 'Calm', 'Senseless', 'Paranormal', 'Incredible', 'Accurate', 'Ancient', 'New', 'Bright', 'Colorful', 'Cute', 'Deep', 'Dark', 'Elegant', 'Fancy', 'Huge', 'Impossible', 'Important']
 
-   generateTitle(): string {
-      const adjective = Math.random() > 0.5 ? this.adjectives[Math.floor(Math.random() * this.adjectives.length)] : ''
+   createTitle(): string {
+      const adjective = this.random(this.adjectives)
       const noun = this.random(this.nouns)
       const term = this.random(this.terms)
-      const title = `The ${adjective} ${noun} ${term}`
-      return this.generateMediaType(title)
+      return `The ${adjective} ${noun} ${term}`
    }
 
-   generateMediaType(nameTitle: string): string {
-      const genre = this.random(this.genre)
-      const type = this.random(this.contentType)
-      const timePeriod = this.generateTimePeriod()
+   generatePrompt(title: string): string {
       let flavour = ""
-      switch(type) {
+      const typeIndex = this.randomIndex(ContentType)
+      switch(ContentType[typeIndex]) {
          case "Poster": {
-            flavour = this.generatePoster()
+            flavour = this.createPoster()
             break;
          }
          case "Painting": {
-            flavour = this.generatePainting()
+            flavour = this.createPainting()
             break;
          }
-         case "Digital art": {
-            flavour = this.generateDigitalArt()
+         case "DigitalArt": {
+            flavour = this.createDigitalArt()
             break;
          }
       }
-         
-      return nameTitle + ", " + timePeriod + ", " + genre + ", " + flavour
+        return title + ", " + this.pickTimePeriod() + ", " + this.random(this.genre) + ", " + flavour
    }
 
-   generatePoster(): string {
-      const posterType = this.random(this.posterType)
-      const posterInspo = this.random(this.posterInspo)
+   createPoster(): string {
+      const type = this.random(this.posterType)
+      const inspo = this.random(this.posterInspo)
 
-      return `${posterType} inspired by ${posterInspo}`
+      return `${type} inspired by ${inspo}`
    }
 
-   generatePainting(): string {
+   createPainting(): string {
       const style = this.random(this.paintingStyle)
       const method = this.random(this.paintingMethod)
       const artist = this.random(this.paintingArtist)
@@ -168,19 +175,25 @@ class NameRandomiser {
       return `${style} ${method} painting by ${artist}`
    }
 
-   generateDigitalArt(): string {
+   createDigitalArt(): string {
       const style = this.random(this.digitalStyle)
       const artist = this.random(this.digitalArtist)
 
       return `${style} digital illustration by ${artist}`
    }
 
-   generateTimePeriod(): string {
-      const isEra = this.coinFlip()
-      if (isEra) {
-         return this.random(this.era)
-      } else {
-         return this.random(this.century)
+   pickTimePeriod(): string {
+      const typeIndex = this.randomIndex(TimePeriod)
+      switch (TimePeriod[typeIndex]) {
+         case "Era": {
+            return this.random(this.era)
+         }
+         case "Century": {
+            return this.random(this.century)
+         }
+         default: {
+            throw ErrorEvent // TODO DEFINE ERROR
+         }
       }
    }
 
@@ -188,7 +201,7 @@ class NameRandomiser {
       return array[Math.floor(Math.random() * array.length)]
    }
 
-   coinFlip() : boolean {
-      return Math.random() > 0.5
+   randomIndex(list: object): number {
+      return Math.floor(Math.random() * Object.keys(list).length / 2)
    }
 }
